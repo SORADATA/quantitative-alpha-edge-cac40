@@ -1,120 +1,120 @@
 Date,N_Stocks,Allocation
-2016-03-31,12,"OrderedDict({'ATO.PA': 0.11632, 'CAP.PA': 0.02, 'ERF.PA': 0.22368, 'FR.PA': 0.02, 'HO.PA': 0.25, 'MT.AS': 0.25, 'PUB.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'WLN.PA': 0.02})"
-2016-04-29,4,"OrderedDict({'ATO.PA': 0.46, 'MT.AS': 0.5, 'STLAP.PA': 0.02, 'WLN.PA': 0.02})"
-2016-05-31,15,"OrderedDict({'ATO.PA': 0.09078, 'BNP.PA': 0.04291, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.02821, 'EL.PA': 0.02, 'ERF.PA': 0.14889, 'GLE.PA': 0.25, 'HO.PA': 0.1962, 'OR.PA': 0.08302, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
+2016-05-31,15,"OrderedDict({'ATO.PA': 0.02, 'BNP.PA': 0.07642, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.09095, 'EL.PA': 0.02, 'ERF.PA': 0.20167, 'GLE.PA': 0.25, 'HO.PA': 0.02, 'OR.PA': 0.02, 'SAF.PA': 0.18095, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
 2016-06-30,0,{}
-2016-07-29,13,"OrderedDict({'ATO.PA': 0.25, 'DSY.PA': 0.02, 'HO.PA': 0.25, 'KER.PA': 0.03365, 'MC.PA': 0.02, 'MT.AS': 0.25, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'SU.PA': 0.05635, 'TEP.PA': 0.02})"
+2016-07-29,13,"OrderedDict({'ATO.PA': 0.02, 'DSY.PA': 0.02, 'HO.PA': 0.1175, 'KER.PA': 0.22414, 'MC.PA': 0.02, 'MT.AS': 0.25, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.22836, 'SU.PA': 0.02, 'TEP.PA': 0.02})"
 2016-08-31,4,"OrderedDict({'ALO.PA': 0.46, 'LR.PA': 0.5, 'STLAP.PA': 0.02, 'TEP.PA': 0.02})"
-2016-09-30,6,"OrderedDict({'ATO.PA': 0.33333, 'ERF.PA': 0.33333, 'FR.PA': 0.20869, 'STLAP.PA': 0.02, 'STMPA.PA': 0.08465, 'TEP.PA': 0.02})"
-2016-10-31,8,"OrderedDict({'BNP.PA': 0.17, 'GLE.PA': 0.25, 'HO.PA': 0.25, 'KER.PA': 0.02, 'MT.AS': 0.25, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02})"
-2016-11-30,9,"OrderedDict({'AIR.PA': 0.02, 'EN.PA': 0.25, 'GLE.PA': 0.25, 'HO.PA': 0.15, 'KER.PA': 0.02, 'MC.PA': 0.02, 'MT.AS': 0.25, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02})"
-2016-12-30,17,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'EN.PA': 0.22, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'SU.PA': 0.02, 'TTE.PA': 0.02, 'WLN.PA': 0.02})"
+2016-09-30,6,"OrderedDict({'ATO.PA': 0.02, 'ERF.PA': 0.33333, 'FR.PA': 0.27333, 'STLAP.PA': 0.02, 'STMPA.PA': 0.33333, 'TEP.PA': 0.02})"
+2016-10-31,8,"OrderedDict({'BNP.PA': 0.02108, 'GLE.PA': 0.25, 'HO.PA': 0.07483, 'KER.PA': 0.18292, 'MT.AS': 0.25, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.18118})"
+2016-11-30,9,"OrderedDict({'AIR.PA': 0.02, 'EN.PA': 0.25, 'GLE.PA': 0.25, 'HO.PA': 0.02, 'KER.PA': 0.07592, 'MC.PA': 0.02, 'MT.AS': 0.25, 'STLAP.PA': 0.02, 'STMPA.PA': 0.09408})"
+2016-12-30,17,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'EN.PA': 0.06034, 'GLE.PA': 0.17897, 'KER.PA': 0.02934, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.21194, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.07313, 'SU.PA': 0.02, 'TTE.PA': 0.22628, 'WLN.PA': 0.02})"
 2017-01-31,0,{}
-2017-02-28,8,"OrderedDict({'AIR.PA': 0.12961, 'ATO.PA': 0.25, 'EN.PA': 0.25, 'HO.PA': 0.25, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.06039, 'WLN.PA': 0.02})"
-2017-03-31,24,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.04549, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.25, 'ENGI.PA': 0.25, 'FR.PA': 0.02, 'KER.PA': 0.02, 'LR.PA': 0.05451, 'MC.PA': 0.02, 'ML.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
-2017-04-28,25,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.07614, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'EL.PA': 0.02, 'ERF.PA': 0.03551, 'FR.PA': 0.02, 'GLE.PA': 0.25, 'HO.PA': 0.1528, 'KER.PA': 0.02, 'LR.PA': 0.08555, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'RI.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.02, 'WLN.PA': 0.02})"
-2017-05-31,15,"OrderedDict({'ALO.PA': 0.02, 'ATO.PA': 0.05303, 'ENGI.PA': 0.25, 'ERF.PA': 0.08382, 'HO.PA': 0.1033, 'KER.PA': 0.02, 'OR.PA': 0.07985, 'ORA.PA': 0.25, 'RI.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02})"
+2017-02-28,8,"OrderedDict({'AIR.PA': 0.24136, 'ATO.PA': 0.02, 'EN.PA': 0.25, 'HO.PA': 0.17625, 'SAN.PA': 0.02239, 'STLAP.PA': 0.02, 'STMPA.PA': 0.25, 'WLN.PA': 0.02})"
+2017-03-31,24,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.15819, 'ENGI.PA': 0.25, 'FR.PA': 0.02, 'KER.PA': 0.06452, 'LR.PA': 0.12729, 'MC.PA': 0.02, 'ML.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
+2017-04-28,25,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'EL.PA': 0.02, 'ERF.PA': 0.05225, 'FR.PA': 0.02, 'GLE.PA': 0.25, 'HO.PA': 0.02, 'KER.PA': 0.10567, 'LR.PA': 0.17207, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'RI.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.02, 'WLN.PA': 0.02})"
+2017-05-31,15,"OrderedDict({'ALO.PA': 0.02, 'ATO.PA': 0.02, 'ENGI.PA': 0.25, 'ERF.PA': 0.07003, 'HO.PA': 0.02, 'KER.PA': 0.09424, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'RI.PA': 0.02, 'SAF.PA': 0.13572, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02})"
 2017-06-30,0,{}
 2017-07-31,0,{}
 2017-08-31,0,{}
-2017-09-29,19,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'BNP.PA': 0.20905, 'CS.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.22095, 'FR.PA': 0.02, 'KER.PA': 0.02, 'MC.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.02, 'VIV.PA': 0.02})"
-2017-10-31,19,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.07389, 'DSY.PA': 0.02, 'EN.PA': 0.25, 'KER.PA': 0.02, 'LR.PA': 0.25, 'MC.PA': 0.02, 'OR.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'SU.PA': 0.02, 'TTE.PA': 0.02, 'VIE.PA': 0.12611, 'WLN.PA': 0.02})"
-2017-11-30,6,"OrderedDict({'AIR.PA': 0.09488, 'EN.PA': 0.33333, 'ORA.PA': 0.33333, 'RI.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.19845})"
+2017-09-29,19,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.08566, 'FR.PA': 0.02, 'KER.PA': 0.04098, 'MC.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.03118, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.08219, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.25, 'VIV.PA': 0.02})"
+2017-10-31,19,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.19626, 'KER.PA': 0.05842, 'LR.PA': 0.10797, 'MC.PA': 0.02, 'OR.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.031, 'STLAP.PA': 0.02, 'STMPA.PA': 0.09635, 'SU.PA': 0.02, 'TTE.PA': 0.25, 'VIE.PA': 0.02, 'WLN.PA': 0.02})"
+2017-11-30,6,"OrderedDict({'AIR.PA': 0.20448, 'EN.PA': 0.33333, 'ORA.PA': 0.33333, 'RI.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.08886})"
 2017-12-29,0,{}
 2018-01-31,6,"OrderedDict({'CA.PA': 0.27333, 'CAP.PA': 0.02, 'GLE.PA': 0.33333, 'LR.PA': 0.33333, 'STLAP.PA': 0.02, 'WLN.PA': 0.02})"
-2018-02-28,4,"{'AIR.PA': 0.25, 'DSY.PA': 0.25, 'PUB.PA': 0.25, 'STLAP.PA': 0.25}"
-2018-03-30,6,"OrderedDict({'ALO.PA': 0.33333, 'DSY.PA': 0.02, 'HO.PA': 0.33333, 'RMS.PA': 0.27333, 'RNO.PA': 0.02, 'STLAP.PA': 0.02})"
-2018-04-30,16,"OrderedDict({'AI.PA': 0.02, 'ALO.PA': 0.0254, 'CAP.PA': 0.02, 'ENGI.PA': 0.25, 'HO.PA': 0.13858, 'KER.PA': 0.02, 'MC.PA': 0.02, 'OR.PA': 0.07681, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.05921, 'VIV.PA': 0.02})"
-2018-05-31,10,"OrderedDict({'ALO.PA': 0.18345, 'DSY.PA': 0.02, 'HO.PA': 0.25, 'KER.PA': 0.02, 'OR.PA': 0.25, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.19655, 'STLAP.PA': 0.02, 'WLN.PA': 0.02})"
-2018-06-29,3,"OrderedDict({'ERF.PA': 0.66667, 'STLAP.PA': 0.09032, 'TEP.PA': 0.24301})"
-2018-07-31,6,"OrderedDict({'CA.PA': 0.33333, 'EL.PA': 0.27333, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.33333})"
-2018-08-31,5,"OrderedDict({'DSY.PA': 0.11441, 'HO.PA': 0.4, 'SAF.PA': 0.4, 'STLAP.PA': 0.02, 'TEP.PA': 0.06559})"
-2018-09-28,8,"OrderedDict({'AI.PA': 0.02, 'CS.PA': 0.17, 'EL.PA': 0.02, 'HO.PA': 0.25, 'RI.PA': 0.02, 'SAF.PA': 0.25, 'STLAP.PA': 0.02, 'TTE.PA': 0.25})"
+2018-02-28,4,"OrderedDict({'AIR.PA': 0.5, 'DSY.PA': 0.02, 'PUB.PA': 0.46, 'STLAP.PA': 0.02})"
+2018-03-30,6,"OrderedDict({'ALO.PA': 0.33333, 'DSY.PA': 0.02, 'HO.PA': 0.33333, 'RMS.PA': 0.19025, 'RNO.PA': 0.02, 'STLAP.PA': 0.10308})"
+2018-04-30,16,"OrderedDict({'AI.PA': 0.02, 'ALO.PA': 0.02, 'CAP.PA': 0.02, 'ENGI.PA': 0.25, 'HO.PA': 0.02, 'KER.PA': 0.03006, 'MC.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.21996, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.04997, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.23001, 'VIV.PA': 0.02})"
+2018-05-31,10,"OrderedDict({'ALO.PA': 0.25, 'DSY.PA': 0.02, 'HO.PA': 0.13, 'KER.PA': 0.25, 'OR.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.25, 'STLAP.PA': 0.02, 'WLN.PA': 0.02})"
+2018-06-29,3,"OrderedDict({'ERF.PA': 0.66667, 'STLAP.PA': 0.31333, 'TEP.PA': 0.02})"
+2018-07-31,6,"OrderedDict({'CA.PA': 0.33333, 'EL.PA': 0.07114, 'SAN.PA': 0.22219, 'STLAP.PA': 0.02, 'TEP.PA': 0.02, 'TTE.PA': 0.33333})"
+2018-08-31,5,"OrderedDict({'DSY.PA': 0.02, 'HO.PA': 0.4, 'SAF.PA': 0.4, 'STLAP.PA': 0.16, 'TEP.PA': 0.02})"
+2018-09-28,8,"OrderedDict({'AI.PA': 0.21127, 'CS.PA': 0.1662, 'EL.PA': 0.02, 'HO.PA': 0.06253, 'RI.PA': 0.02, 'SAF.PA': 0.25, 'STLAP.PA': 0.02, 'TTE.PA': 0.25})"
 2018-10-31,0,{}
 2018-11-30,0,{}
 2018-12-31,0,{}
-2019-01-31,10,"OrderedDict({'AIR.PA': 0.02, 'CA.PA': 0.2439, 'ENGI.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'OR.PA': 0.17582, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.21029, 'STLAP.PA': 0.02})"
-2019-02-28,16,"OrderedDict({'AIR.PA': 0.02, 'BNP.PA': 0.22078, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.03922, 'DSY.PA': 0.02, 'EN.PA': 0.25, 'KER.PA': 0.02, 'LR.PA': 0.25, 'MC.PA': 0.02, 'ML.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIV.PA': 0.02})"
-2019-03-29,10,"OrderedDict({'AIR.PA': 0.13, 'DG.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'OR.PA': 0.25, 'ORA.PA': 0.25, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'VIV.PA': 0.02})"
-2019-04-30,20,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.16814, 'FR.PA': 0.02, 'LR.PA': 0.24186, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02})"
+2019-01-31,10,"OrderedDict({'AIR.PA': 0.02, 'CA.PA': 0.25, 'ENGI.PA': 0.25, 'KER.PA': 0.13704, 'MC.PA': 0.02, 'OR.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.24296, 'STLAP.PA': 0.02})"
+2019-02-28,16,"OrderedDict({'AIR.PA': 0.02, 'BNP.PA': 0.02, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.25, 'KER.PA': 0.14836, 'LR.PA': 0.25, 'MC.PA': 0.02, 'ML.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.11164, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIV.PA': 0.02})"
+2019-03-29,10,"OrderedDict({'AIR.PA': 0.17122, 'DG.PA': 0.22687, 'KER.PA': 0.23191, 'MC.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'VIV.PA': 0.02})"
+2019-04-30,20,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.13976, 'FR.PA': 0.02, 'LR.PA': 0.25, 'MC.PA': 0.02, 'ML.PA': 0.02, 'OR.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.04024, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02})"
 2019-05-31,0,{}
-2019-06-28,10,"OrderedDict({'AI.PA': 0.17795, 'EL.PA': 0.02, 'FR.PA': 0.20176, 'HO.PA': 0.25, 'LR.PA': 0.25, 'MC.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02029, 'WLN.PA': 0.02})"
-2019-07-31,5,"OrderedDict({'AI.PA': 0.16, 'ALO.PA': 0.4, 'EL.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.4})"
-2019-08-30,5,"OrderedDict({'DG.PA': 0.4, 'EL.PA': 0.14214, 'EN.PA': 0.4, 'RI.PA': 0.03786, 'STLAP.PA': 0.02})"
-2019-09-30,8,"OrderedDict({'CS.PA': 0.02, 'EN.PA': 0.25, 'ENGI.PA': 0.25, 'ORA.PA': 0.25, 'SAF.PA': 0.15941, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.03059})"
-2019-10-31,6,"OrderedDict({'AIR.PA': 0.27333, 'KER.PA': 0.02, 'LR.PA': 0.33333, 'OR.PA': 0.33333, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02})"
-2019-11-29,13,"OrderedDict({'AI.PA': 0.02, 'ATO.PA': 0.13067, 'BNP.PA': 0.18933, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'ERF.PA': 0.25, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'TEP.PA': 0.02})"
-2019-12-31,9,"OrderedDict({'AI.PA': 0.15111, 'ALO.PA': 0.21592, 'BNP.PA': 0.25, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.05297, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
-2020-01-31,6,"OrderedDict({'AI.PA': 0.02, 'ALO.PA': 0.09904, 'ENGI.PA': 0.33333, 'HO.PA': 0.25723, 'STLAP.PA': 0.02, 'VIE.PA': 0.27039})"
+2019-06-28,10,"OrderedDict({'AI.PA': 0.11995, 'EL.PA': 0.02, 'FR.PA': 0.25, 'HO.PA': 0.14871, 'LR.PA': 0.25, 'MC.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.13134, 'WLN.PA': 0.02})"
+2019-07-31,5,"OrderedDict({'AI.PA': 0.16281, 'ALO.PA': 0.39719, 'EL.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.4})"
+2019-08-30,5,"OrderedDict({'DG.PA': 0.4, 'EL.PA': 0.13399, 'EN.PA': 0.4, 'RI.PA': 0.02619, 'STLAP.PA': 0.03982})"
+2019-09-30,8,"OrderedDict({'CS.PA': 0.02, 'EN.PA': 0.2248, 'ENGI.PA': 0.25, 'ORA.PA': 0.25, 'SAF.PA': 0.1952, 'SAN.PA': 0.02, 'STLAP.PA': 0.02, 'VIE.PA': 0.02})"
+2019-10-31,6,"OrderedDict({'AIR.PA': 0.02, 'KER.PA': 0.29001, 'LR.PA': 0.33333, 'OR.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.31666})"
+2019-11-29,13,"OrderedDict({'AI.PA': 0.02, 'ATO.PA': 0.02, 'BNP.PA': 0.02473, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'ERF.PA': 0.19359, 'GLE.PA': 0.25, 'KER.PA': 0.15631, 'MC.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.21537, 'TEP.PA': 0.02})"
+2019-12-31,9,"OrderedDict({'AI.PA': 0.02675, 'ALO.PA': 0.08598, 'BNP.PA': 0.12087, 'GLE.PA': 0.25, 'KER.PA': 0.2064, 'STLAP.PA': 0.02, 'STMPA.PA': 0.25, 'VIV.PA': 0.02, 'WLN.PA': 0.02})"
+2020-01-31,6,"OrderedDict({'AI.PA': 0.19651, 'ALO.PA': 0.17454, 'ENGI.PA': 0.33333, 'HO.PA': 0.06624, 'STLAP.PA': 0.02, 'VIE.PA': 0.20939})"
 2020-02-28,0,{}
 2020-03-31,0,{}
 2020-04-30,0,{}
-2020-05-29,5,"OrderedDict({'DSY.PA': 0.02, 'ERF.PA': 0.4, 'RMS.PA': 0.16, 'SGO.PA': 0.4, 'STLAP.PA': 0.02})"
-2020-06-30,6,"OrderedDict({'ATO.PA': 0.30751, 'LR.PA': 0.33333, 'OR.PA': 0.29915, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'WLN.PA': 0.02})"
-2020-07-31,3,"{'AI.PA': 0.3333333333333333, 'STLAP.PA': 0.3333333333333333, 'TEP.PA': 0.3333333333333333}"
+2020-05-29,5,"OrderedDict({'DSY.PA': 0.02, 'ERF.PA': 0.4, 'RMS.PA': 0.0646, 'SGO.PA': 0.4, 'STLAP.PA': 0.1154})"
+2020-06-30,6,"OrderedDict({'ATO.PA': 0.04513, 'LR.PA': 0.33333, 'OR.PA': 0.2482, 'STLAP.PA': 0.02, 'SU.PA': 0.33333, 'WLN.PA': 0.02})"
+2020-07-31,3,"OrderedDict({'AI.PA': 0.66667, 'STLAP.PA': 0.31333, 'TEP.PA': 0.02})"
 2020-08-31,0,{}
 2020-09-30,0,{}
 2020-10-30,0,{}
-2020-11-30,17,"OrderedDict({'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.03624, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'FR.PA': 0.02, 'GLE.PA': 0.25, 'MC.PA': 0.02, 'MT.AS': 0.20376, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'TTE.PA': 0.02})"
-2020-12-31,6,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'MC.PA': 0.33333, 'MT.AS': 0.33333, 'RMS.PA': 0.27333, 'STLAP.PA': 0.02})"
+2020-11-30,16,"OrderedDict({'AIR.PA': 0.02, 'ALO.PA': 0.02, 'ATO.PA': 0.02, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'FR.PA': 0.02, 'GLE.PA': 0.18706, 'MC.PA': 0.02, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.07294, 'TTE.PA': 0.25})"
+2020-12-31,5,"{'CAP.PA': 0.2, 'DSY.PA': 0.2, 'MC.PA': 0.2, 'RMS.PA': 0.2, 'STLAP.PA': 0.2}"
 2021-01-29,0,{}
-2021-02-26,7,"OrderedDict({'BNP.PA': 0.28571, 'CS.PA': 0.13859, 'GLE.PA': 0.28571, 'ML.PA': 0.22998, 'PUB.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02})"
-2021-03-31,12,"OrderedDict({'CA.PA': 0.13554, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'LR.PA': 0.20235, 'MT.AS': 0.25, 'OR.PA': 0.02211, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02})"
-2021-04-30,13,"OrderedDict({'CA.PA': 0.15531, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.16144, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'OR.PA': 0.10818, 'RMS.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'VIE.PA': 0.16507, 'WLN.PA': 0.02})"
-2021-05-31,11,"OrderedDict({'AIR.PA': 0.02, 'CA.PA': 0.16523, 'ERF.PA': 0.18255, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'LR.PA': 0.25, 'MC.PA': 0.02, 'OR.PA': 0.03222, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02})"
-2021-06-30,8,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.25, 'ERF.PA': 0.25, 'LR.PA': 0.25, 'RI.PA': 0.17, 'RMS.PA': 0.02, 'TEP.PA': 0.02})"
-2021-07-30,10,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.10686, 'LR.PA': 0.25, 'MT.AS': 0.25, 'RMS.PA': 0.02, 'SGO.PA': 0.02, 'STMPA.PA': 0.04314, 'TEP.PA': 0.02, 'VIE.PA': 0.25})"
-2021-08-31,11,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.21921, 'LR.PA': 0.25, 'STMPA.PA': 0.02, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.14079, 'VIV.PA': 0.02})"
+2021-02-26,7,"OrderedDict({'BNP.PA': 0.28571, 'CS.PA': 0.28571, 'GLE.PA': 0.28571, 'ML.PA': 0.08286, 'PUB.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02})"
+2021-03-31,11,"OrderedDict({'CA.PA': 0.25, 'CAP.PA': 0.02, 'CS.PA': 0.11, 'LR.PA': 0.25, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'TEP.PA': 0.02})"
+2021-04-30,13,"OrderedDict({'CA.PA': 0.23184, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.08727, 'GLE.PA': 0.25, 'KER.PA': 0.20052, 'MC.PA': 0.02, 'OR.PA': 0.02, 'RMS.PA': 0.02, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'VIE.PA': 0.07037, 'WLN.PA': 0.02})"
+2021-05-31,11,"OrderedDict({'AIR.PA': 0.02, 'CA.PA': 0.21855, 'ERF.PA': 0.10276, 'GLE.PA': 0.25, 'KER.PA': 0.08508, 'LR.PA': 0.2236, 'MC.PA': 0.02, 'OR.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'STLAP.PA': 0.02})"
+2021-06-30,8,"OrderedDict({'CAP.PA': 0.18548, 'DSY.PA': 0.02, 'EL.PA': 0.23363, 'ERF.PA': 0.25, 'LR.PA': 0.25, 'RI.PA': 0.02089, 'RMS.PA': 0.02, 'TEP.PA': 0.02})"
+2021-07-30,9,"OrderedDict({'CAP.PA': 0.06654, 'DSY.PA': 0.02, 'EL.PA': 0.10346, 'LR.PA': 0.25, 'RMS.PA': 0.02, 'SGO.PA': 0.02, 'STMPA.PA': 0.25, 'TEP.PA': 0.02, 'VIE.PA': 0.25})"
+2021-08-31,11,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.18266, 'LR.PA': 0.25, 'STMPA.PA': 0.17734, 'SU.PA': 0.02, 'TEP.PA': 0.02, 'VIE.PA': 0.02, 'VIV.PA': 0.02})"
 2021-09-30,0,{}
-2021-10-29,6,"OrderedDict({'CAP.PA': 0.02, 'CS.PA': 0.33333, 'DSY.PA': 0.02, 'EL.PA': 0.27333, 'RMS.PA': 0.02, 'STMPA.PA': 0.33333})"
+2021-10-29,6,"OrderedDict({'CAP.PA': 0.11621, 'CS.PA': 0.33333, 'DSY.PA': 0.02, 'EL.PA': 0.17713, 'RMS.PA': 0.02, 'STMPA.PA': 0.33333})"
 2021-11-30,0,{}
 2021-12-31,5,"OrderedDict({'LR.PA': 0.4, 'SU.PA': 0.16, 'TEP.PA': 0.02, 'VIE.PA': 0.4, 'VIV.PA': 0.02})"
 2022-01-31,0,{}
 2022-02-28,0,{}
 2022-03-31,0,{}
 2022-04-29,0,{}
-2022-05-31,4,"OrderedDict({'ALO.PA': 0.12039, 'FR.PA': 0.02, 'GLE.PA': 0.5, 'TTE.PA': 0.35961})"
+2022-05-31,4,"OrderedDict({'ALO.PA': 0.03208, 'FR.PA': 0.02, 'GLE.PA': 0.44792, 'TTE.PA': 0.5})"
 2022-06-30,0,{}
-2022-07-29,14,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'KER.PA': 0.02, 'MC.PA': 0.02, 'OR.PA': 0.25, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.25, 'STLAP.PA': 0.02, 'STMPA.PA': 0.25, 'SU.PA': 0.05, 'WLN.PA': 0.02})"
+2022-07-29,14,"OrderedDict({'CAP.PA': 0.02, 'DSY.PA': 0.02, 'KER.PA': 0.25, 'MC.PA': 0.02, 'OR.PA': 0.02, 'PUB.PA': 0.02, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.25, 'STLAP.PA': 0.02, 'STMPA.PA': 0.25, 'SU.PA': 0.05, 'WLN.PA': 0.02})"
 2022-08-31,0,{}
 2022-09-30,0,{}
-2022-10-31,9,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'DG.PA': 0.23352, 'ENGI.PA': 0.25, 'HO.PA': 0.2293, 'PUB.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'TTE.PA': 0.18718})"
-2022-11-30,14,"OrderedDict({'ALO.PA': 0.02515, 'BNP.PA': 0.25, 'CS.PA': 0.02, 'DG.PA': 0.20998, 'EL.PA': 0.02, 'ENGI.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.05546, 'STLAP.PA': 0.02, 'TTE.PA': 0.04941})"
+2022-10-31,9,"OrderedDict({'AI.PA': 0.11012, 'AIR.PA': 0.02, 'DG.PA': 0.09797, 'ENGI.PA': 0.25, 'HO.PA': 0.02, 'PUB.PA': 0.02, 'SAF.PA': 0.21191, 'SAN.PA': 0.02, 'TTE.PA': 0.25})"
+2022-11-30,14,"OrderedDict({'ALO.PA': 0.03978, 'BNP.PA': 0.02741, 'CS.PA': 0.02, 'DG.PA': 0.02988, 'EL.PA': 0.02, 'ENGI.PA': 0.25, 'KER.PA': 0.10204, 'MC.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.16089, 'STLAP.PA': 0.02, 'TTE.PA': 0.25})"
 2022-12-30,0,{}
-2023-01-31,13,"OrderedDict({'ALO.PA': 0.02383, 'BNP.PA': 0.25, 'CS.PA': 0.02, 'DG.PA': 0.25, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'MC.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.06617, 'STMPA.PA': 0.02, 'TEP.PA': 0.02, 'VIV.PA': 0.02})"
-2023-02-28,12,"OrderedDict({'ALO.PA': 0.02, 'BNP.PA': 0.11945, 'CA.PA': 0.08155, 'CS.PA': 0.02, 'EN.PA': 0.25, 'HO.PA': 0.159, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'RNO.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02})"
-2023-03-31,6,"OrderedDict({'ENGI.PA': 0.33333, 'OR.PA': 0.27333, 'ORA.PA': 0.33333, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAN.PA': 0.02})"
-2023-04-28,8,"OrderedDict({'AI.PA': 0.02, 'DG.PA': 0.02687, 'EN.PA': 0.25, 'ENGI.PA': 0.25, 'OR.PA': 0.16313, 'ORA.PA': 0.25, 'RMS.PA': 0.02, 'VIV.PA': 0.02})"
+2023-01-31,13,"OrderedDict({'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.05829, 'GLE.PA': 0.25, 'KER.PA': 0.16772, 'MC.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.1538, 'STMPA.PA': 0.21019, 'TEP.PA': 0.02, 'VIV.PA': 0.02})"
+2023-02-28,12,"OrderedDict({'ALO.PA': 0.03103, 'BNP.PA': 0.06075, 'CA.PA': 0.12175, 'CS.PA': 0.02, 'EN.PA': 0.25, 'HO.PA': 0.02, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'RNO.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.16647})"
+2023-03-31,6,"OrderedDict({'ENGI.PA': 0.33333, 'OR.PA': 0.21677, 'ORA.PA': 0.33333, 'RI.PA': 0.02, 'RMS.PA': 0.02, 'SAN.PA': 0.07656})"
+2023-04-28,8,"OrderedDict({'AI.PA': 0.11693, 'DG.PA': 0.02865, 'EN.PA': 0.25, 'ENGI.PA': 0.25, 'OR.PA': 0.06443, 'ORA.PA': 0.25, 'RMS.PA': 0.02, 'VIV.PA': 0.02})"
 2023-05-31,0,{}
 2023-06-30,5,"OrderedDict({'ENGI.PA': 0.4, 'GLE.PA': 0.4, 'OR.PA': 0.16, 'RNO.PA': 0.02, 'STLAP.PA': 0.02})"
-2023-07-31,10,"OrderedDict({'BNP.PA': 0.03573, 'CA.PA': 0.15604, 'EN.PA': 0.25, 'ERF.PA': 0.20822, 'GLE.PA': 0.25, 'ML.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02})"
+2023-07-31,10,"OrderedDict({'BNP.PA': 0.02, 'CA.PA': 0.20428, 'EN.PA': 0.25, 'ERF.PA': 0.12468, 'GLE.PA': 0.25, 'ML.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.07103, 'SGO.PA': 0.02, 'STLAP.PA': 0.02})"
 2023-08-31,0,{}
 2023-09-29,0,{}
 2023-10-31,0,{}
-2023-11-30,18,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.2, 'ENGI.PA': 0.25, 'ML.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'SAF.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.02, 'SU.PA': 0.02, 'URW.PA': 0.02, 'VIE.PA': 0.02})"
-2023-12-29,12,"OrderedDict({'BNP.PA': 0.21263, 'DSY.PA': 0.02, 'ERF.PA': 0.24007, 'ML.PA': 0.02, 'MT.AS': 0.25, 'OR.PA': 0.04396, 'PUB.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02, 'URW.PA': 0.11334, 'VIV.PA': 0.02})"
-2024-01-31,10,"OrderedDict({'CAP.PA': 0.02, 'CS.PA': 0.13, 'DSY.PA': 0.02, 'MC.PA': 0.02, 'MT.AS': 0.25, 'PUB.PA': 0.02, 'SAF.PA': 0.25, 'SU.PA': 0.02, 'VIE.PA': 0.25, 'VIV.PA': 0.02})"
-2024-02-29,13,"OrderedDict({'AI.PA': 0.02, 'CAP.PA': 0.02, 'CS.PA': 0.19419, 'EL.PA': 0.02, 'EN.PA': 0.25, 'MC.PA': 0.02, 'ML.PA': 0.12581, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.25, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.02})"
-2024-03-29,18,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.25, 'ERF.PA': 0.10187, 'GLE.PA': 0.25, 'HO.PA': 0.11813, 'ML.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'TTE.PA': 0.02, 'URW.PA': 0.02})"
-2024-04-30,7,"OrderedDict({'BNP.PA': 0.28571, 'ENGI.PA': 0.28571, 'ML.PA': 0.04459, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'TTE.PA': 0.11325, 'URW.PA': 0.23073})"
-2024-05-31,9,"OrderedDict({'ALO.PA': 0.02, 'BNP.PA': 0.08687, 'ENGI.PA': 0.25, 'GLE.PA': 0.25, 'ML.PA': 0.02, 'RNO.PA': 0.02, 'SGO.PA': 0.02, 'URW.PA': 0.1607, 'VIE.PA': 0.17243})"
+2023-11-30,17,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'CAP.PA': 0.02, 'DG.PA': 0.02, 'DSY.PA': 0.02, 'EN.PA': 0.10036, 'ENGI.PA': 0.25, 'ML.PA': 0.02, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'PUB.PA': 0.02, 'SAF.PA': 0.06344, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'STMPA.PA': 0.0962, 'SU.PA': 0.02, 'VIE.PA': 0.02})"
+2023-12-29,10,"OrderedDict({'BNP.PA': 0.25, 'DSY.PA': 0.02, 'ERF.PA': 0.25, 'ML.PA': 0.03586, 'OR.PA': 0.11414, 'PUB.PA': 0.02, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.25, 'VIV.PA': 0.02})"
+2024-01-31,9,"OrderedDict({'CAP.PA': 0.02, 'CS.PA': 0.20449, 'DSY.PA': 0.02, 'MC.PA': 0.02, 'PUB.PA': 0.02, 'SAF.PA': 0.25, 'SU.PA': 0.19551, 'VIE.PA': 0.25, 'VIV.PA': 0.02})"
+2024-02-29,13,"OrderedDict({'AI.PA': 0.15552, 'CAP.PA': 0.02, 'CS.PA': 0.12125, 'EL.PA': 0.02, 'EN.PA': 0.25, 'MC.PA': 0.02, 'ML.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'SAF.PA': 0.25, 'SGO.PA': 0.02, 'STLAP.PA': 0.02, 'SU.PA': 0.06322})"
+2024-03-29,17,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CS.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.21294, 'ERF.PA': 0.06038, 'GLE.PA': 0.21668, 'HO.PA': 0.02, 'ML.PA': 0.02, 'PUB.PA': 0.02, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'STLAP.PA': 0.02, 'TTE.PA': 0.25})"
+2024-04-30,6,"OrderedDict({'BNP.PA': 0.20889, 'ENGI.PA': 0.33333, 'ML.PA': 0.08444, 'SAN.PA': 0.02, 'SGO.PA': 0.02, 'TTE.PA': 0.33333})"
+2024-05-31,8,"OrderedDict({'ALO.PA': 0.10306, 'BNP.PA': 0.08832, 'ENGI.PA': 0.25, 'GLE.PA': 0.25, 'ML.PA': 0.02, 'RNO.PA': 0.02, 'SGO.PA': 0.02, 'VIE.PA': 0.24862})"
 2024-06-28,0,{}
 2024-07-31,0,{}
-2024-08-30,5,"OrderedDict({'CS.PA': 0.02, 'ENGI.PA': 0.4, 'LR.PA': 0.34717, 'SAN.PA': 0.02, 'VIE.PA': 0.21283})"
-2024-09-30,4,"OrderedDict({'ERF.PA': 0.25893, 'MT.AS': 0.5, 'RMS.PA': 0.02, 'URW.PA': 0.22107})"
+2024-08-30,5,"OrderedDict({'CS.PA': 0.03942, 'ENGI.PA': 0.4, 'LR.PA': 0.39602, 'SAN.PA': 0.02, 'VIE.PA': 0.14456})"
+2024-09-30,0,{}
 2024-10-31,0,{}
 2024-11-29,0,{}
 2024-12-31,3,"{'RMS.PA': 0.3333333333333333, 'RNO.PA': 0.3333333333333333, 'WLN.PA': 0.3333333333333333}"
-2025-01-31,18,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'BNP.PA': 0.02, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.10482, 'FR.PA': 0.02, 'GLE.PA': 0.22734, 'HO.PA': 0.02007, 'MT.AS': 0.13777, 'ORA.PA': 0.25, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.02, 'SAN.PA': 0.02, 'URW.PA': 0.02})"
-2025-02-28,12,"OrderedDict({'AI.PA': 0.02, 'BNP.PA': 0.02, 'DG.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.06056, 'ENGI.PA': 0.25, 'GLE.PA': 0.14189, 'HO.PA': 0.02, 'MT.AS': 0.15754, 'ORA.PA': 0.25, 'SAF.PA': 0.02, 'VIE.PA': 0.02})"
-2025-03-31,6,"OrderedDict({'EN.PA': 0.20439, 'ENGI.PA': 0.33333, 'HO.PA': 0.06494, 'ORA.PA': 0.33333, 'TTE.PA': 0.04401, 'VIE.PA': 0.02})"
-2025-04-30,9,"OrderedDict({'CS.PA': 0.02, 'DG.PA': 0.02, 'EN.PA': 0.12502, 'ENGI.PA': 0.25, 'ERF.PA': 0.03851, 'GLE.PA': 0.22148, 'OR.PA': 0.05499, 'ORA.PA': 0.25, 'VIE.PA': 0.02})"
-2025-05-30,12,"OrderedDict({'BNP.PA': 0.02, 'CS.PA': 0.02, 'ENGI.PA': 0.25, 'ERF.PA': 0.04073, 'GLE.PA': 0.17963, 'HO.PA': 0.02765, 'LR.PA': 0.13199, 'ML.PA': 0.02, 'ORA.PA': 0.25, 'SAF.PA': 0.02, 'URW.PA': 0.02, 'VIV.PA': 0.02})"
-2025-06-30,6,"OrderedDict({'AIR.PA': 0.02, 'ENGI.PA': 0.33333, 'ERF.PA': 0.25188, 'LR.PA': 0.33333, 'SAF.PA': 0.04146, 'STMPA.PA': 0.02})"
-2025-07-31,8,"OrderedDict({'ERF.PA': 0.20549, 'GLE.PA': 0.25, 'KER.PA': 0.02, 'LR.PA': 0.25, 'OR.PA': 0.12558, 'SAF.PA': 0.02, 'URW.PA': 0.10893, 'VIV.PA': 0.02})"
+2025-01-31,16,"OrderedDict({'AI.PA': 0.02, 'AIR.PA': 0.02, 'BNP.PA': 0.02, 'CAP.PA': 0.02, 'CS.PA': 0.02, 'DSY.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.21301, 'FR.PA': 0.02, 'GLE.PA': 0.25, 'HO.PA': 0.02, 'ORA.PA': 0.25, 'RMS.PA': 0.02, 'RNO.PA': 0.02, 'SAF.PA': 0.04699, 'SAN.PA': 0.02})"
+2025-02-28,11,"OrderedDict({'AI.PA': 0.02, 'BNP.PA': 0.02, 'DG.PA': 0.02, 'EL.PA': 0.02, 'EN.PA': 0.1158, 'ENGI.PA': 0.25, 'GLE.PA': 0.19967, 'HO.PA': 0.02, 'ORA.PA': 0.25, 'SAF.PA': 0.06453, 'VIE.PA': 0.02})"
+2025-03-31,6,"OrderedDict({'EN.PA': 0.08194, 'ENGI.PA': 0.33333, 'HO.PA': 0.02, 'ORA.PA': 0.22723, 'TTE.PA': 0.3175, 'VIE.PA': 0.02})"
+2025-04-30,9,"OrderedDict({'CS.PA': 0.02, 'DG.PA': 0.02, 'EN.PA': 0.12094, 'ENGI.PA': 0.25, 'ERF.PA': 0.09011, 'GLE.PA': 0.20895, 'OR.PA': 0.02, 'ORA.PA': 0.25, 'VIE.PA': 0.02})"
+2025-05-30,11,"OrderedDict({'BNP.PA': 0.02, 'CS.PA': 0.02, 'ENGI.PA': 0.25, 'ERF.PA': 0.06736, 'GLE.PA': 0.1518, 'HO.PA': 0.02, 'LR.PA': 0.16084, 'ML.PA': 0.02, 'ORA.PA': 0.25, 'SAF.PA': 0.02, 'VIV.PA': 0.02})"
+2025-06-30,6,"OrderedDict({'AIR.PA': 0.02, 'ENGI.PA': 0.33333, 'ERF.PA': 0.18875, 'LR.PA': 0.25397, 'SAF.PA': 0.05924, 'STMPA.PA': 0.14471})"
+2025-07-31,7,"OrderedDict({'ERF.PA': 0.17109, 'GLE.PA': 0.28571, 'KER.PA': 0.16476, 'LR.PA': 0.28571, 'OR.PA': 0.02, 'SAF.PA': 0.05271, 'VIV.PA': 0.02})"
 2025-08-29,0,{}
-2025-09-30,6,"OrderedDict({'AIR.PA': 0.02, 'ATO.PA': 0.20419, 'HO.PA': 0.33333, 'KER.PA': 0.02, 'LR.PA': 0.33333, 'SAF.PA': 0.08915})"
-2025-10-31,6,"OrderedDict({'AIR.PA': 0.19456, 'EL.PA': 0.03535, 'ENGI.PA': 0.33333, 'FR.PA': 0.08343, 'LR.PA': 0.33333, 'MC.PA': 0.02})"
-2025-11-28,6,"OrderedDict({'EN.PA': 0.22626, 'ENGI.PA': 0.33333, 'GLE.PA': 0.22779, 'MC.PA': 0.02, 'MT.AS': 0.17261, 'TTE.PA': 0.02})"
-2025-12-31,10,"OrderedDict({'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CA.PA': 0.02, 'CS.PA': 0.02, 'EN.PA': 0.22363, 'ENGI.PA': 0.25, 'ERF.PA': 0.04621, 'GLE.PA': 0.22519, 'MC.PA': 0.02, 'MT.AS': 0.15497})"
-2026-01-30,8,"OrderedDict({'BNP.PA': 0.02, 'ENGI.PA': 0.25, 'GLE.PA': 0.2172, 'ML.PA': 0.02, 'MT.AS': 0.2028, 'ORA.PA': 0.25, 'TTE.PA': 0.02, 'VIE.PA': 0.02})"
+2025-09-30,6,"OrderedDict({'AIR.PA': 0.02, 'ATO.PA': 0.02, 'HO.PA': 0.02, 'KER.PA': 0.29109, 'LR.PA': 0.33333, 'SAF.PA': 0.31558})"
+2025-10-31,6,"OrderedDict({'AIR.PA': 0.14111, 'EL.PA': 0.02, 'ENGI.PA': 0.33333, 'FR.PA': 0.15222, 'LR.PA': 0.33333, 'MC.PA': 0.02})"
+2025-11-28,5,"OrderedDict({'EN.PA': 0.10034, 'ENGI.PA': 0.34661, 'GLE.PA': 0.18662, 'MC.PA': 0.02, 'TTE.PA': 0.34643})"
+2025-12-31,9,"OrderedDict({'ALO.PA': 0.02, 'BNP.PA': 0.02, 'CA.PA': 0.14851, 'CS.PA': 0.02, 'EN.PA': 0.21387, 'ENGI.PA': 0.25, 'ERF.PA': 0.08635, 'GLE.PA': 0.22127, 'MC.PA': 0.02})"
+2026-01-30,7,"OrderedDict({'BNP.PA': 0.02, 'ENGI.PA': 0.27352, 'GLE.PA': 0.14679, 'ML.PA': 0.02, 'ORA.PA': 0.23398, 'TTE.PA': 0.28571, 'VIE.PA': 0.02})"
+2026-02-27,14,"OrderedDict({'AI.PA': 0.02, 'BNP.PA': 0.02, 'CA.PA': 0.02, 'CS.PA': 0.02, 'DG.PA': 0.02, 'EN.PA': 0.02, 'ENGI.PA': 0.24363, 'LR.PA': 0.07194, 'ML.PA': 0.02, 'ORA.PA': 0.21139, 'STMPA.PA': 0.06567, 'SU.PA': 0.02, 'TTE.PA': 0.22736, 'VIE.PA': 0.02})"
+2026-03-31,0,{}

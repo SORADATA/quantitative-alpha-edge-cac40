@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta
-import os
+from pathlib import Path
 import numpy as np
 import json
 import yfinance as yf
@@ -22,6 +22,9 @@ st.set_page_config(
 
 # REFRESH AUTOMATIQUE (15 min)
 st_autorefresh(interval=900000, key="datarefresh")
+
+# Chemins robustes pour la production
+BASE_DIR = Path(__file__).resolve().parent
 
 # CSS Personnalisé
 st.markdown("""
@@ -56,20 +59,6 @@ st.markdown("""
         font-size: 14px; 
         text-transform: uppercase; 
     }
-    .error-box {
-        background-color: #2D1B1B;
-        border-left: 4px solid #EF553B;
-        padding: 12px;
-        border-radius: 4px;
-        margin: 10px 0;
-    }
-    .warning-box {
-        background-color: #2D2B1B;
-        border-left: 4px solid #FFA726;
-        padding: 12px;
-        border-radius: 4px;
-        margin: 10px 0;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -77,12 +66,12 @@ st.markdown("""
 # 2. CHARGEMENT DES DONNÉES (AVEC VALIDATION)
 # =============================================================================
 
-@st.cache_data(ttl=600)
+@st.cache_data(ttl=600, show_spinner=False)
 def load_all_data():
     """Charge les CSVs avec validation complète"""
-    history_file = 'portfolio_history.csv'
-    signals_file = 'latest_signals.csv'
-    rebalance_file = 'rebalance_history.csv'
+    history_file = BASE_DIR / 'portfolio_history.csv'
+    signals_file = BASE_DIR / 'latest_signals.csv'
+    rebalance_file = BASE_DIR / 'rebalance_history.csv'
     
     df_hist = pd.DataFrame()
     df_signals = pd.DataFrame()
@@ -90,12 +79,11 @@ def load_all_data():
     errors = []
     
     # 1. Historique Portfolio
-    if os.path.exists(history_file):
+    if history_file.exists():
         try:
             df_hist = pd.read_csv(history_file, index_col=0)
             df_hist.index = pd.to_datetime(df_hist.index, format='mixed', errors='coerce')
-            df_hist = df_hist[df_hist.index.notna()]
-            df_hist.sort_index(ascending=True, inplace=True)
+            df_hist = df_hist[df_hist.index.notna()].sort_index(ascending=True)
             
             if not df_hist.empty:
                 last_date = df_hist.index[-1]
@@ -105,10 +93,10 @@ def load_all_data():
         except Exception as e:
             errors.append(f"❌ Error loading portfolio history: {e}")
     else:
-        errors.append(f"❌ File not found: {history_file}")
+        errors.append(f"❌ File not found: {history_file.name}")
     
     # 2. Signaux
-    if os.path.exists(signals_file):
+    if signals_file.exists():
         try:
             df_signals = pd.read_csv(signals_file)
             required_cols = ['Ticker', 'Signal']
@@ -118,32 +106,29 @@ def load_all_data():
         except Exception as e:
             errors.append(f"❌ Error loading signals: {e}")
     else:
-        errors.append(f"❌ File not found: {signals_file}")
+        errors.append(f"❌ File not found: {signals_file.name}")
     
     # 3. Rebalance history
-    if os.path.exists(rebalance_file):
+    if rebalance_file.exists():
         try:
             df_rebalance = pd.read_csv(rebalance_file, index_col=0)
-            df_rebalance.index = pd.to_datetime(df_rebalance.index)
-            df_rebalance.sort_index(inplace=True)
+            df_rebalance.index = pd.to_datetime(df_rebalance.index).sort_values()
         except Exception as e:
             errors.append(f"⚠️ Could not load rebalance history: {e}")
     
     return df_hist, df_signals, df_rebalance, errors
 
-# Chargement
 with st.spinner("Loading data..."):
     df_hist, df_signals, df_rebalance, load_errors = load_all_data()
 
 # =============================================================================
-# 3. FONCTIONS UTILITAIRES (OPTIMISÉES)
+# 3. FONCTIONS UTILITAIRES
 # =============================================================================
 
 def display_kpi_card(label, value, is_percent=True, color_code=False, prefix="", minimal=False):
     """KPI Card avec gestion robuste des valeurs NaN/Inf"""
     if pd.isna(value) or np.isinf(value):
-        formatted_val = "N/A"
-        html_val = f'<span class="kpi-value">{formatted_val}</span>'
+        html_val = '<span class="kpi-value">N/A</span>'
     else:
         formatted_val = f"{prefix}{value:.1%}" if is_percent else f"{prefix}{value:.2f}"
         if color_code:
@@ -163,108 +148,67 @@ def display_kpi_card(label, value, is_percent=True, color_code=False, prefix="",
 
 def calculate_metrics(df):
     """Calcul métriques avec validation edge cases"""
-    if df.empty or len(df) < 2:
-        return 0, 0, 0, 0
-    
+    if df.empty or len(df) < 2: return 0, 0, 0, 0
     try:
         total_ret = (df['Strategy'].iloc[-1] / df['Strategy'].iloc[0]) - 1
         bench_ret = (df['Benchmark'].iloc[-1] / df['Benchmark'].iloc[0]) - 1
         alpha = total_ret - bench_ret
         
         strategy_returns = df['Strategy'].pct_change().dropna()
-        if len(strategy_returns) > 0 and strategy_returns.std() != 0:
-            sharpe = (strategy_returns.mean() / strategy_returns.std()) * np.sqrt(252)
-        else:
-            sharpe = 0
+        sharpe = (strategy_returns.mean() / strategy_returns.std()) * np.sqrt(252) if len(strategy_returns) > 0 and strategy_returns.std() != 0 else 0
         
         cum_ret = (1 + strategy_returns).cumprod()
         max_dd = ((cum_ret - cum_ret.cummax()) / cum_ret.cummax()).min()
         
         return total_ret, alpha, sharpe, max_dd
-    except Exception as e:
+    except:
         return 0, 0, 0, 0
 
 def calculate_period_return(df, days=None, ytd=False, daily=False):
-    """Calcul rendements par période avec validation"""
-    if df.empty or 'Strategy' not in df.columns or len(df) < 2:
-        return 0.0
-    
+    """Calcul rendements par période"""
+    if df.empty or 'Strategy' not in df.columns or len(df) < 2: return 0.0
     try:
-        if daily and len(df) >= 2:
-            return (df['Strategy'].iloc[-1] / df['Strategy'].iloc[-2]) - 1
+        if daily: return (df['Strategy'].iloc[-1] / df['Strategy'].iloc[-2]) - 1
+        last_price, last_date = df['Strategy'].iloc[-1], df.index[-1]
         
-        last_price = df['Strategy'].iloc[-1]
-        last_date = df.index[-1]
+        if ytd: target_date = datetime(last_date.year, 1, 1)
+        elif days: target_date = last_date - timedelta(days=days)
+        else: target_date = df.index[0]
         
-        if ytd:
-            target_date = datetime(last_date.year, 1, 1)
-        elif days:
-            target_date = last_date - timedelta(days=days)
-        else:
-            target_date = df.index[0]
-        
-        if target_date < df.index[0]:
-            start_price = df['Strategy'].iloc[0]
-        else:
-            idx = df.index.get_indexer([target_date], method='nearest')[0]
-            start_price = df['Strategy'].iloc[idx]
-        
-        if start_price == 0:
-            return 0.0
-        
-        return ((last_price / start_price) - 1)
+        start_price = df['Strategy'].iloc[0] if target_date < df.index[0] else df['Strategy'].iloc[df.index.get_indexer([target_date], method='nearest')[0]]
+        return ((last_price / start_price) - 1) if start_price != 0 else 0.0
     except:
         return 0.0
 
 @st.cache_data(ttl=3600)
 def get_live_ticker_data(ticker, period="1y"):
     """Télécharge données yfinance avec RETRY mechanism"""
-    MAX_RETRIES = 3
-    RETRY_DELAY = 2
-    
-    for attempt in range(MAX_RETRIES):
+    for _ in range(3):
         try:
             df = yf.download(ticker, period=period, progress=False, timeout=10)
-            
-            if df.empty:
-                if attempt < MAX_RETRIES - 1:
-                    time.sleep(RETRY_DELAY)
-                    continue
-                else:
-                    return pd.DataFrame()
-            
-            if isinstance(df.columns, pd.MultiIndex):
-                df.columns = df.columns.get_level_values(0)
-            
-            df.columns = df.columns.str.lower()
-            if 'adj close' not in df.columns and 'close' in df.columns:
-                df['adj close'] = df['close']
-            
-            return df
-        except Exception as e:
-            if attempt < MAX_RETRIES - 1:
-                time.sleep(RETRY_DELAY)
-            else:
-                return pd.DataFrame()
-    
+            if not df.empty:
+                df.columns = df.columns.get_level_values(0) if isinstance(df.columns, pd.MultiIndex) else df.columns
+                df.columns = df.columns.str.lower()
+                if 'adj close' not in df.columns and 'close' in df.columns:
+                    df['adj close'] = df['close']
+                return df
+            time.sleep(2)
+        except:
+            time.sleep(2)
     return pd.DataFrame()
 
 # =============================================================================
-# 4. SIDEBAR (AMÉLIORÉE AVEC TICKER HEALTH)
+# 4. SIDEBAR 
 # =============================================================================
 
 st.sidebar.title("AlphaEdge")
 st.sidebar.caption("Quantitative Asset Allocation")
 
 if st.sidebar.button("🔄 Force Sync Pipeline"):
-    with st.spinner("Clearing cache..."):
-        st.cache_data.clear()
-        time.sleep(0.5)
-    st.success("✅ Cache cleared!", icon="✅")
+    st.cache_data.clear()
     st.rerun()
 
-github_url = "https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation"
-st.sidebar.markdown(f"[![GitHub](https://img.shields.io/badge/GITHUB-Source_Code-181717?style=for-the-badge&logo=github&logoColor=white)]({github_url})")
+st.sidebar.markdown(f"[![GitHub](https://img.shields.io/badge/GITHUB-Source_Code-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation)")
 
 st.sidebar.markdown("---")
 page = st.sidebar.radio("Navigation", [
@@ -279,20 +223,11 @@ st.sidebar.markdown("---")
 # STATUS INDICATOR 
 if not df_hist.empty:
     last_dt = df_hist.index[-1]
-    date_str = last_dt.date() if isinstance(last_dt, pd.Timestamp) else str(last_dt).split(" ")[0]
-    
     days_old = (datetime.now() - last_dt).days
-    if days_old == 0:
-        status_icon = "🟢"
-        status_text = "● System Online"
-    elif days_old <= 3:
-        status_icon = "🟡"
-        status_text = "○ Data Slightly Old"
-    else:
-        status_icon = "🔴"
-        status_text = "○ Data Outdated"
     
-    st.sidebar.info(f"Last Update: {date_str}")
+    status_icon, status_text = ("🟢", "● System Online") if days_old == 0 else ("🟡", "○ Data Slightly Old") if days_old <= 3 else ("🔴", "○ Data Outdated")
+    
+    st.sidebar.info(f"Last Update: {last_dt.date() if hasattr(last_dt, 'date') else str(last_dt).split(' ')[0]}")
     st.sidebar.markdown(f"{status_icon} {status_text}")
 else:
     st.sidebar.error("❌ No Data Available")
@@ -300,52 +235,27 @@ else:
 st.sidebar.markdown("---")
 
 # TICKER HEALTH 
-if os.path.exists('ticker_validation.json'):
+ticker_val_path = BASE_DIR / 'ticker_validation.json'
+if ticker_val_path.exists():
     with st.sidebar.expander("🔍 Ticker Health", expanded=False):
         try:
-            with open('ticker_validation.json', 'r') as f:
-                validation = json.load(f)
-            
+            with open(ticker_val_path, 'r') as f: validation = json.load(f)
             alerts = validation.get('alerts', {})
             
-            if alerts.get('delisted'):
-                st.error(f"❌ {len(alerts['delisted'])} delistés")
-                st.caption(", ".join(alerts['delisted'][:3]))
-            
-            if alerts.get('stale'):
-                st.warning(f"⚠️ {len(alerts['stale'])} obsolètes")
-            
-            if alerts.get('warnings'):
-                st.info(f"ℹ️ {len(alerts['warnings'])} warnings")
-            
+            if alerts.get('delisted'): st.error(f"❌ {len(alerts['delisted'])} delistés")
+            if alerts.get('stale'): st.warning(f"⚠️ {len(alerts['stale'])} obsolètes")
+            if alerts.get('warnings'): st.info(f"ℹ️ {len(alerts['warnings'])} warnings")
             st.metric("Valid Tickers", validation.get('valid_tickers', 0))
         except:
             st.caption("Validation data unavailable")
 
 st.sidebar.markdown("---")
 
-# SYSTEM HEALTH
-if os.path.exists('pipeline_health.json'):
-    with st.sidebar.expander(" System Health", expanded=False):
-        try:
-            with open('pipeline_health.json', 'r') as f:
-                health = json.load(f)
-            
-            if isinstance(health, list) and len(health) > 0:
-                latest = health[-1]
-                st.metric("Pipeline Duration", f"{latest.get('pipeline_duration_seconds', 0):.0f}s")
-                st.metric("Data Freshness", f"{latest.get('data_freshness_days', 0)} days")
-                st.metric("Selection Rate", f"{latest.get('selection_rate', 0):.1%}")
-        except:
-            st.caption("Health metrics unavailable")
-
 # DATA ISSUES
 if load_errors:
     with st.sidebar.expander("⚠️ Data Issues", expanded=False):
-        for err in load_errors:
-            st.warning(err, icon="⚠️")
+        for err in load_errors: st.warning(err, icon="⚠️")
 
-st.sidebar.markdown("---")
 st.sidebar.caption("⚠️ **Disclaimer:** Not financial advice.")
 
 # =============================================================================
@@ -397,26 +307,10 @@ if page == "Dashboard":
         df_base = df_c.apply(lambda x: x / x.iloc[0] * 100)
         
         fig = go.Figure()
-        fig.add_trace(go.Scatter(
-            x=df_base.index, y=df_base['Strategy'], 
-            mode='lines', name='Hybrid Strategy', 
-            line=dict(color='#00CC96', width=2.5),
-            fill='tonexty', fillcolor='rgba(0, 204, 150, 0.1)'
-        ))
-        fig.add_trace(go.Scatter(
-            x=df_base.index, y=df_base['Benchmark'], 
-            mode='lines', name='Benchmark', 
-            line=dict(color='#8b92a5', width=1.5, dash='dash')
-        ))
+        fig.add_trace(go.Scatter(x=df_base.index, y=df_base['Strategy'], mode='lines', name='Hybrid Strategy', line=dict(color='#00CC96', width=2.5), fill='tonexty', fillcolor='rgba(0, 204, 150, 0.1)'))
+        fig.add_trace(go.Scatter(x=df_base.index, y=df_base['Benchmark'], mode='lines', name='Benchmark', line=dict(color='#8b92a5', width=1.5, dash='dash')))
         
-        fig.update_layout(
-            template="plotly_dark", 
-            margin=dict(l=0, r=0, t=10, b=0), 
-            height=400, 
-            hovermode="x unified",
-            legend=dict(orientation="h", y=1.02, x=1, xanchor="right"),
-            yaxis_title="Indexed Value (Base 100)"
-        )
+        fig.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=10, b=0), height=400, hovermode="x unified", legend=dict(orientation="h", y=1.02, x=1, xanchor="right"), yaxis_title="Indexed Value (Base 100)")
         st.plotly_chart(fig, use_container_width=True)
         
         st.markdown("---")
@@ -430,20 +324,8 @@ if page == "Dashboard":
             dd = (cum - cum.cummax()) / cum.cummax()
             
             fig_dd = go.Figure()
-            fig_dd.add_trace(go.Scatter(
-                x=dd.index, y=dd, 
-                fill='tozeroy', mode='lines', 
-                line=dict(color='#EF553B', width=1.5), 
-                name='Drawdown',
-                fillcolor='rgba(239, 85, 59, 0.3)'
-            ))
-            fig_dd.update_layout(
-                template="plotly_dark", 
-                margin=dict(l=0, r=0, t=10, b=0), 
-                height=320, 
-                yaxis_tickformat='.1%',
-                yaxis_title="Drawdown"
-            )
+            fig_dd.add_trace(go.Scatter(x=dd.index, y=dd, fill='tozeroy', mode='lines', line=dict(color='#EF553B', width=1.5), name='Drawdown', fillcolor='rgba(239, 85, 59, 0.3)'))
+            fig_dd.update_layout(template="plotly_dark", margin=dict(l=0, r=0, t=10, b=0), height=320, yaxis_tickformat='.1%', yaxis_title="Drawdown")
             st.plotly_chart(fig_dd, use_container_width=True)
         
         with c_pie:
@@ -457,18 +339,9 @@ if page == "Dashboard":
                 else:
                     final = active
                 
-                fig_p = px.pie(
-                    final, values='Allocation', names='Ticker', 
-                    hole=0.5, 
-                    color_discrete_sequence=px.colors.qualitative.Prism
-                )
+                fig_p = px.pie(final, values='Allocation', names='Ticker', hole=0.5, color_discrete_sequence=px.colors.qualitative.Prism)
                 fig_p.update_traces(textposition='outside', textinfo='percent+label')
-                fig_p.update_layout(
-                    template="plotly_dark", 
-                    margin=dict(l=20, r=20, t=0, b=0), 
-                    showlegend=False, 
-                    height=370
-                )
+                fig_p.update_layout(template="plotly_dark", margin=dict(l=20, r=20, t=0, b=0), showlegend=False, height=370)
                 st.plotly_chart(fig_p, use_container_width=True)
             else:
                 st.info("⏳ Waiting for signals...")
@@ -484,24 +357,17 @@ elif page == "Daily Signals":
     
     if not df_signals.empty:
         d = df_signals.copy()
-        if 'Allocation' in d.columns:
-            d = d.sort_values('Allocation', ascending=False)
+        if 'Allocation' in d.columns: d = d.sort_values('Allocation', ascending=False)
         
         col_filter1, col_filter2 = st.columns([1, 3])
         with col_filter1:
             filter_opt = st.selectbox("Filter", ["All Signals", "BUY Only", "NEUTRAL Only"])
-        
-        if filter_opt == "BUY Only":
-            d = d[d['Signal'] == 'BUY']
-        elif filter_opt == "NEUTRAL Only":
-            d = d[d['Signal'] == 'NEUTRAL']
-        
+            
+        if filter_opt == "BUY Only": d = d[d['Signal'] == 'BUY']
+        elif filter_opt == "NEUTRAL Only": d = d[d['Signal'] == 'NEUTRAL']
         
         st.dataframe(
-            d, 
-            use_container_width=True, 
-            height=600, 
-            hide_index=True,
+            d, use_container_width=True, height=600, hide_index=True,
             column_config={
                 "Allocation": st.column_config.ProgressColumn("Weight", format="%.2f", min_value=0, max_value=1),
                 "Proba_Hausse": st.column_config.NumberColumn("Probability ↑", format="%.1f%%")
@@ -510,13 +376,14 @@ elif page == "Daily Signals":
         
         st.markdown("---")
         col_s1, col_s2, col_s3 = st.columns(3)
-        with col_s1: st.metric("Total Tickers", len(d))
-        with col_s2:
-            n_buy = len(d[d['Signal'] == 'ACHAT']) if 'Signal' in d.columns else 0
+        with col_s1: st.metric("Total Tickers", len(df_signals)) # Fix : compte total original
+        with col_s2: 
+            # THE FIX: Explicitly count 'BUY' strings in the Signal column
+            n_buy = len(df_signals[df_signals['Signal'] == 'BUY']) if 'Signal' in df_signals.columns else 0
             st.metric("BUY Signals", n_buy)
-        with col_s3:
-            if 'Allocation' in d.columns:
-                st.metric("Total Allocated", f"{d['Allocation'].sum():.1%}")
+        with col_s3: 
+            alloc_total = df_signals['Allocation'].sum() if 'Allocation' in df_signals.columns else 0
+            st.metric("Total Allocated", f"{alloc_total:.1%}")
     else:
         st.info("⏳ No signals. Run pipeline first.")
 
@@ -531,10 +398,8 @@ elif page == "Data Explorer":
     tickers = df_signals['Ticker'].unique().tolist() if not df_signals.empty and 'Ticker' in df_signals.columns else default_tickers
     
     col_sel1, col_sel2 = st.columns([1, 3])
-    with col_sel1:
-        selected_ticker = st.selectbox("Select Asset", tickers, index=0)
-    with col_sel2:
-        period_exp = st.selectbox("Timeframe", ["1 Month", "3 Months", "6 Months", "1 Year", "5 Years"], index=2)
+    with col_sel1: selected_ticker = st.selectbox("Select Asset", tickers, index=0)
+    with col_sel2: period_exp = st.selectbox("Timeframe", ["1 Month", "3 Months", "6 Months", "1 Year", "5 Years"], index=2)
     
     yf_period_map = {"1 Month": "1mo", "3 Months": "3mo", "6 Months": "6mo", "1 Year": "1y", "5 Years": "5y"}
     
@@ -589,17 +454,19 @@ elif page == "Model Details":
         """)
         st.markdown("---")
         
-        try:
-            with open("src/models/metrics.json", "r") as f:
-                metrics = json.load(f)
-            
-            st.markdown("### Model Performance (Test Set)")
-            col1, col2, col3, col4 = st.columns(4)
-            with col1: st.metric("Accuracy", f"{metrics.get('accuracy', 0):.2%}")
-            with col2: st.metric("Precision", f"{metrics.get('precision', 0):.2%}")
-            with col3: st.metric("Recall", f"{metrics.get('recall', 0):.2%}")
-            with col4: st.metric("ROC AUC", f"{metrics.get('auc_score', 0):.4f}")
-        except:
+        metrics_path = BASE_DIR / "src" / "models" / "metrics.json"
+        if metrics_path.exists():
+            try:
+                with open(metrics_path, "r") as f: metrics = json.load(f)
+                st.markdown("### Model Performance (Test Set)")
+                col1, col2, col3, col4 = st.columns(4)
+                with col1: st.metric("Accuracy", f"{metrics.get('accuracy', 0):.2%}")
+                with col2: st.metric("Precision", f"{metrics.get('precision', 0):.2%}")
+                with col3: st.metric("Recall", f"{metrics.get('recall', 0):.2%}")
+                with col4: st.metric("ROC AUC", f"{metrics.get('auc_score', 0):.4f}")
+            except:
+                st.info("⏳ Metrics unreadable.")
+        else:
             st.info("⏳ Metrics not available. Train model first.")
     
     with tab2:
@@ -608,11 +475,7 @@ elif page == "Model Details":
         
         if not df_signals.empty and 'RSI' in df_signals.columns and 'Return_3M' in df_signals.columns:
             fig = px.scatter(
-                df_signals, 
-                x="RSI", 
-                y="Return_3M", 
-                color="Cluster", 
-                hover_name="Ticker",
+                df_signals, x="RSI", y="Return_3M", color="Cluster", hover_name="Ticker",
                 color_continuous_scale=px.colors.sequential.Viridis,
                 labels={"RSI": "RSI (20)", "Return_3M": "3-Month Momentum"}
             )
@@ -636,10 +499,10 @@ elif page == "Rebalance History":
         
         col_r1, col_r2, col_r3 = st.columns(3)
         with col_r1: st.metric("Total Rebalances", len(df_rebalance))
-        with col_r2:
+        with col_r2: 
             avg_stocks = df_rebalance['N_Stocks'].mean() if 'N_Stocks' in df_rebalance.columns else 0
             st.metric("Avg. Stocks/Month", f"{avg_stocks:.1f}")
-        with col_r3:
+        with col_r3: 
             last_rebal = df_rebalance.index[-1].date() if len(df_rebalance) > 0 else "N/A"
             st.metric("Last Rebalance", str(last_rebal))
         
@@ -648,20 +511,8 @@ elif page == "Rebalance History":
         if 'N_Stocks' in df_rebalance.columns:
             st.subheader(" Portfolio Size Evolution")
             fig = go.Figure()
-            fig.add_trace(go.Scatter(
-                x=df_rebalance.index, 
-                y=df_rebalance['N_Stocks'], 
-                mode='lines+markers', 
-                name='N° Stocks', 
-                line=dict(color='#00CC96', width=2),
-                marker=dict(size=6)
-            ))
-            fig.update_layout(
-                template="plotly_dark", 
-                height=350, 
-                yaxis_title="Number of Stocks",
-                xaxis_title="Date"
-            )
+            fig.add_trace(go.Scatter(x=df_rebalance.index, y=df_rebalance['N_Stocks'], mode='lines+markers', name='N° Stocks', line=dict(color='#00CC96', width=2), marker=dict(size=6)))
+            fig.update_layout(template="plotly_dark", height=350, yaxis_title="Number of Stocks", xaxis_title="Date")
             st.plotly_chart(fig, use_container_width=True)
         
         st.subheader("📋 Detailed Rebalancing Log")
@@ -677,18 +528,8 @@ st.markdown("---")
 st.markdown("""
 <div class="disclaimer-box">
     <div class="disclaimer-title">⚠️ AVIS DE NON-RESPONSABILITÉ</div>
-    <p>
-        Les informations présentées sur ce tableau de bord sont fournies 
-        <strong>à titre informatif et éducatif uniquement</strong>. 
-        Elles ne constituent en aucun cas un conseil en investissement.
-    </p>
-    <p>
-        <strong>Risques :</strong> Tout investissement comporte des risques. 
-        Les performances passées ne garantissent pas les résultats futurs.
-    </p>
-    <p>
-        <strong>Responsabilité :</strong> Consultez un conseiller financier agréé 
-        avant toute décision d'investissement.
-    </p>
+    <p>Les informations présentées sur ce tableau de bord sont fournies <strong>à titre informatif et éducatif uniquement</strong>. Elles ne constituent en aucun cas un conseil en investissement.</p>
+    <p><strong>Risques :</strong> Tout investissement comporte des risques. Les performances passées ne garantissent pas les résultats futurs.</p>
+    <p><strong>Responsabilité :</strong> Consultez un conseiller financier agréé avant toute décision d'investissement.</p>
 </div>
 """, unsafe_allow_html=True)
