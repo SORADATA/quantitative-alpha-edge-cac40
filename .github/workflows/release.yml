@@ -1,25 +1,38 @@
-name: Create Release
+name: Release
 
 on:
   push:
-    tags:
-      - 'v*' # Se déclenche pour tout tag commençant par 'v'
+    branches:
+      - main
+      - pre-release # branche de pré-production
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-    permissions: # Important pour autoriser l'écriture de la release
-      contents: write
+    permissions:
+      contents: write   # Pour créer des tags et releases
+      issues: write     # Pour commenter les issues liées
+      pull-requests: write # Pour commenter les PR liées
       
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          generate_release_notes: true # Génère automatiquement la liste des changements
+          persist-credentials: false
+          fetch-depth: 0 # Important : semantic-release a besoin de tout l'historique
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+
+      - name: Install dependencies
+        # On utilise "npm install" si pas de package-lock.json, 
+        # sinon "npm ci" est préférable.
+        run: |
+          npm install @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/github
+
+      - name: Run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
