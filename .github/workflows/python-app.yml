@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    # On aligne la version Python avec ton daily_run (3.11)
+    # On aligne la version Python avec daily_run (3.11)
     - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
@@ -38,8 +38,8 @@ jobs:
         # Affiche juste des avertissements pour le style (longueur de ligne, etc.)
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
-    # J'ai mis cette étape en conditionnel "continue-on-error" 
-    # car tu n'as probablement pas encore écrit de tests dans un dossier tests/
+    # Cette étape en conditionnel "continue-on-error" 
+  
     - name: Test with pytest
       continue-on-error: true 
       run: |
