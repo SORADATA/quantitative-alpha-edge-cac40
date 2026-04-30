@@ -1,3 +1,35 @@
+## [1.6.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.5.0...v1.6.0) (2026-04-30)
+
+### Features
+
+* Add backtest using markovitz ([1aeef28](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/1aeef28f998ff1f33f4e1aa5d01340d84374cf25))
+* Add features for etl ([be1014c](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/be1014c635693ccea3138710cb8d86939b0614c8))
+* Add get_becnhmark_returns ([c7fb308](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/c7fb3084e775ba239b1ecdc8ba700954ac2a57bb))
+* Add pipeline with functions ([f47fb6e](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/f47fb6e2f795fa327b4151691d21f16440d47d61))
+* Add safe_normalize and compute functions ([f122ff0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/f122ff0655942d90d47f86b107420891b57e8048))
+* Add technical_features ([90616e2](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/90616e2d2d4d91ccc2d229997916e032d10d976d))
+* init repo ([2557331](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/2557331362c22b74403362b2bdd47884aa3875e0))
+* **pipeline:** Improve infra and clean code ([af350cd](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/af350cdf6977f5a88b67b9a1fd445c1f146bdfec))
+
+## [1.5.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.4.0...v1.5.0) (2026-04-30)
+
+### Features
+
+* Add validate_ticker for clean ([fe9e573](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/fe9e573285a2c02968dae4af88952fab483bb08d))
+* Add validate_ticker for clean ([9e980df](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/9e980df765a51ca9e7bd6e24eb3cc3dcbeac0b16))
+
+## [1.4.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.3.0...v1.4.0) (2026-04-30)
+
+### Features
+
+* Add logging configuration for maintenance ([639e432](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/639e4326c97b7fd13029f80dc68697537b5fbbc7))
+
+## [1.3.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.2.0...v1.3.0) (2026-04-30)
+
+### Features
+
+* Add load_market_config ([e879344](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/e879344c911ee448e03328ec4a79ace9c912cc3f))
+
 ## [1.2.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.1.0...v1.2.0) (2026-04-09)
 
 ### Features

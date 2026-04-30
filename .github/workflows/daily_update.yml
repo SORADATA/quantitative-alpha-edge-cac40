@@ -40,9 +40,9 @@ jobs:
       # ══════════════════════════════════════════════════════
       # 2. Run Analytics Pipeline
       # ══════════════════════════════════════════════════════
-      - name: 🚀 Execute Portfolio Optimization
+      - name:  Execute Portfolio Optimization
         run: |
-          echo "🚀 Starting portfolio analytics pipeline..."
+          echo " Starting portfolio analytics pipeline..."
           python daily_run.py
           echo "✅ Pipeline completed successfully"
         env:
@@ -104,10 +104,10 @@ jobs:
       # ══════════════════════════════════════════════════════
       # 5. Job Summary
       # ══════════════════════════════════════════════════════
-      - name: 📊 Generate job summary
+      - name: Generate job summary
         if: always()
         run: |
-          echo "## 📊 Portfolio Analytics Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Portfolio Analytics Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Date**: $(date +'%Y-%m-%d %H:%M UTC')" >> $GITHUB_STEP_SUMMARY
           echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
@@ -115,7 +115,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           
           if [ -f latest_signals.csv ]; then
-            echo "### 📈 Latest Signals (Top 5)" >> $GITHUB_STEP_SUMMARY
+            echo "### Latest Signals (Top 5)" >> $GITHUB_STEP_SUMMARY
             echo '```csv' >> $GITHUB_STEP_SUMMARY
             head -n 6 latest_signals.csv >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
