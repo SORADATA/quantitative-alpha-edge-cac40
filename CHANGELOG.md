@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.3.0...v1.4.0) (2026-04-30)
+
+### Features
+
+* Add logging configuration for maintenance ([639e432](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/639e4326c97b7fd13029f80dc68697537b5fbbc7))
+
 ## [1.3.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.2.0...v1.3.0) (2026-04-30)
 
 ### Features
