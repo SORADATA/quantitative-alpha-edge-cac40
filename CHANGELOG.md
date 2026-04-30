@@ -1,3 +1,10 @@
+## [1.5.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.4.0...v1.5.0) (2026-04-30)
+
+### Features
+
+* Add validate_ticker for clean ([fe9e573](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/fe9e573285a2c02968dae4af88952fab483bb08d))
+* Add validate_ticker for clean ([9e980df](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/commit/9e980df765a51ca9e7bd6e24eb3cc3dcbeac0b16))
+
 ## [1.4.0](https://github.com/SORADATA/CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/compare/v1.3.0...v1.4.0) (2026-04-30)
 
 ### Features
