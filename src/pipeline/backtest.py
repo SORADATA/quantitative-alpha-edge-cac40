@@ -1,9 +1,15 @@
 from typing import Any, Dict, Tuple
-
 import numpy as np
 import pandas as pd
+from pypfopt import EfficientFrontier, risk_models, expected_returns
 
-from const import TARGET_CLUSTER, PROBA_THRESHOLD, FEATURE_COLS, TRADING_DAYS_YEAR
+from const import (
+    TARGET_CLUSTER,
+    PROBA_THRESHOLD,
+    FEATURE_COLS,
+    TRADING_DAYS_YEAR,
+    RISK_FREE_RATE
+)
 from src.utils.logger import setup_logger
 from src.utils.config_loader import BENCHMARK_TICKER
 from src.utils.market_utils import get_benchmark_returns
@@ -11,28 +17,33 @@ from src.utils.market_utils import get_benchmark_returns
 logger = setup_logger("backtest")
 
 
+def get_optimal_weights(prices_df: pd.DataFrame) -> Tuple[Dict[str, float], bool]:
+    try:
+        mu = expected_returns.mean_historical_return(prices_df, frequency=TRADING_DAYS_YEAR)
+        S = risk_models.CovarianceShrinkage(prices_df, frequency=TRADING_DAYS_YEAR).ledoit_wolf()
+
+        ef = EfficientFrontier(mu, S, weight_bounds=(0.02, 0.25))
+        ef.max_sharpe(risk_free_rate=RISK_FREE_RATE)
+        
+        return dict(ef.clean_weights()), True
+    except Exception as e:
+        logger.warning(f"Optimization failed: {e}")
+        return {}, False
+
+
 def _generate_monthly_signals(
     month_data: pd.DataFrame,
     xgb_model: Any,
     kmeans_model: Any,
 ) -> pd.DataFrame:
-    """
-    Adds cluster assignment and upside probability to a single month snapshot.
-    Returns the annotated slice; callers filter on TARGET_CLUSTER / PROBA_THRESHOLD.
-    """
     if "rsi" in month_data.columns:
         month_data = month_data.copy()
-        month_data["cluster"] = kmeans_model.predict(
-            month_data[["rsi"]].fillna(50)
-        )
+        month_data["cluster"] = kmeans_model.predict(month_data[["rsi"]].fillna(50))
 
     if not all(c in month_data.columns for c in FEATURE_COLS):
         return pd.DataFrame()
 
-    month_data["proba_upside"] = xgb_model.predict_proba(
-        month_data[FEATURE_COLS].fillna(0)
-    )[:, 1]
-
+    month_data["proba_upside"] = xgb_model.predict_proba(month_data[FEATURE_COLS].fillna(0))[:, 1]
     return month_data
 
 
@@ -44,13 +55,7 @@ def _simulate_daily_returns(
     portfolio_value: float,
     benchmark_value: float,
 ) -> Tuple[list, float, float]:
-    """
-    Applies a fixed allocation over a slice of trading days.
-    Uses a pre-computed daily_returns DataFrame (pct_change, no intraday indexing).
-    Returns (day_records, updated_portfolio_value, updated_benchmark_value).
-    """
     records = []
-
     for date in trading_days:
         bench_ret = benchmark_returns.get(date, 0.0)
         strat_ret = 0.0
@@ -77,12 +82,7 @@ def backtest_strategy_with_rebalancing(
     kmeans_model: Any,
     get_optimal_weights_fn: Any,
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    """
-    Simulates the strategy historically with monthly rebalancing.
-    Signals are generated from df_monthly; P&L is computed on daily prices.
-    Returns (portfolio_history, rebalance_log).
-    """
-    logger.info("Starting backtest with monthly rebalancing...")
+    logger.info("Starting backtest...")
 
     daily_prices = df_daily["adj close"].unstack().ffill()
     daily_returns = daily_prices.pct_change().fillna(0)
@@ -94,10 +94,8 @@ def backtest_strategy_with_rebalancing(
         BENCHMARK_TICKER, date_min, date_max, daily_prices.index
     )
 
-    portfolio_value = 100.0
-    benchmark_value = 100.0
-    all_records = []
-    rebalance_log = []
+    portfolio_value, benchmark_value = 100.0, 100.0
+    all_records, rebalance_log = [], []
     monthly_dates = df_monthly.index.get_level_values("date").unique().sort_values()
 
     for i, month_date in enumerate(monthly_dates[:-1]):
@@ -108,11 +106,10 @@ def backtest_strategy_with_rebalancing(
         )
 
         allocation: Dict[str, float] = {}
-
         if not month_data.empty:
             selected = month_data[
-                (month_data["cluster"] == TARGET_CLUSTER)
-                & (month_data["proba_upside"] > PROBA_THRESHOLD)
+                (month_data["cluster"] == TARGET_CLUSTER) & 
+                (month_data["proba_upside"] > PROBA_THRESHOLD)
             ]
 
             if not selected.empty:
@@ -124,22 +121,14 @@ def backtest_strategy_with_rebalancing(
                     allocation = weights if success else {t: 1.0 / len(tickers) for t in tickers}
 
         next_month = monthly_dates[i + 1]
-        trading_days = daily_prices.index[
-            (daily_prices.index >= month_date) & (daily_prices.index < next_month)
-        ]
+        trading_days = daily_prices.index[(daily_prices.index >= month_date) & (daily_prices.index < next_month)]
 
         day_records, portfolio_value, benchmark_value = _simulate_daily_returns(
             allocation, trading_days, daily_returns,
             benchmark_returns, portfolio_value, benchmark_value,
         )
         all_records.extend(day_records)
-        rebalance_log.append(
-            {"Date": month_date, "N_Stocks": len(allocation), "Allocation": allocation}
-        )
+        rebalance_log.append({"Date": month_date, "N_Stocks": len(allocation), "Allocation": allocation})
 
     logger.info(f"Backtest complete. Final value: {portfolio_value:.2f}")
-
-    portfolio_history = pd.DataFrame(all_records).set_index("Date")
-    rebalance_df = pd.DataFrame(rebalance_log).set_index("Date")
-
-    return portfolio_history, rebalance_df
+    return pd.DataFrame(all_records).set_index("Date"), pd.DataFrame(rebalance_log).set_index("Date")
