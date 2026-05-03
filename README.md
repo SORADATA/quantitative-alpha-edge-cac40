@@ -196,8 +196,12 @@ CAC40-Quantitative-Analysis-Predictive-Asset-Allocation/
 │   │   ├── optimization.py          # Portfolio allocation
 │   │   └── evaluation.py            # Performance metrics
 │   └── config.py                    # Centralized configuration
+│   ├── pipeline/
+│   │   ├── backtest.py        
+│   │   └── etl.py                     
 ├── app.py                           # Streamlit dashboard
 ├── daily_run.py                     # Main pipeline orchestrator
+├── const.py                         # Constants variables
 ├── requirements.txt                 # Python dependencies
 ├── LICENSE                          # MIT License
 └── README.md                        # You are here!
