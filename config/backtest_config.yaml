@@ -12,11 +12,11 @@ transaction:
   min_cost: 0.0
 
 strategy:
+  method: "topk"
   target_cluster: 3
-  #proba_threshold: 0.55
+  proba_threshold: 0.55
   weight_bounds: [0.02, 0.25]
   lookback_days: 252
-  proba_threshold: 0.6
   feature_cols:
     - rsi
     - macd

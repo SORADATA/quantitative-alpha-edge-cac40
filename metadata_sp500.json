@@ -1,17 +1,18 @@
 {
     "market_name": "S&P 500 (USA)",
-    "last_update": "2026-05-06T16:33:00.955897",
+    "strategy_method": "topk",
+    "top_k": 5,
+    "target_cluster": 3,
+    "proba_threshold": 0.55,
+    "last_update": "2026-05-06T18:10:53.449777",
     "current_allocation": {
-        "AAPL": 0.17171,
-        "AMD": 0.25,
-        "AMZN": 0.02,
-        "AVGO": 0.08741,
-        "CSCO": 0.18088,
-        "GOOGL": 0.25,
-        "ORCL": 0.02,
-        "UNH": 0.02
+        "ORCL": 0.2,
+        "UNH": 0.2,
+        "AAPL": 0.2,
+        "GOOGL": 0.2,
+        "AVGO": 0.2
     },
     "metrics": {
-        "final_value": 408.727628388865
+        "final_value": 511.6113551257301
     }
 }

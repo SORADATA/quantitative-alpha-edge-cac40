@@ -1,19 +1,12 @@
-from typing import Any, Dict, Tuple
-import math
+from typing import Dict, Tuple
 import numpy as np
 import pandas as pd
-from pypfopt import EfficientFrontier, risk_models, expected_returns
 
-from src.strategy.signals import AlphaSignal
-from const import (
-    TARGET_CLUSTER,
-    PROBA_THRESHOLD,
-    TRADING_DAYS_YEAR,
-    RISK_FREE_RATE,
-)
+from const import TRADING_DAYS_YEAR
 from src.utils.logger import setup_logger
 from src.utils.config_loader import BENCHMARK_TICKER
 from src.utils.market_utils import get_benchmark_returns
+
 
 logger = setup_logger("backtest")
 
@@ -44,48 +37,15 @@ def calculate_turnover_friction(
 # PORTFOLIO CONSTRUCTION
 # =============================================================================
 
-def get_optimal_weights(
-    prices_df: pd.DataFrame,
-    weight_bounds: Tuple[float, float] = (0.02, 0.25),
-) -> Tuple[Dict[str, float], bool]:
-    try:
-        if prices_df.empty or prices_df.shape[1] == 0:
-            return {}, False
-
-        mu = expected_returns.mean_historical_return(
-            prices_df,
-            frequency=TRADING_DAYS_YEAR,
-        )
-        S = risk_models.CovarianceShrinkage(
-            prices_df,
-            frequency=TRADING_DAYS_YEAR,
-        ).ledoit_wolf()
-
-        ef = EfficientFrontier(mu, S, weight_bounds=weight_bounds)
-        ef.max_sharpe(risk_free_rate=RISK_FREE_RATE)
-
-        weights = dict(ef.clean_weights())
-        weights = {k: v for k, v in weights.items() if v > 0}
-
-        if not weights:
-            return {}, False
-
-        return weights, True
-
-    except Exception as e:
-        logger.warning(f"Optimization failed: {e}")
-        return {}, False
-
-
 def get_topk_equal_weights(
     selected: pd.DataFrame,
-    topk: int = 10,
+    top_k: int = 5,
     score_col: str = "proba_upside",
 ) -> Dict[str, float]:
     if selected.empty:
         return {}
 
-    top_selected = selected.sort_values(score_col, ascending=False).head(topk)
+    top_selected = selected.sort_values(score_col, ascending=False).head(top_k)
     n = len(top_selected)
 
     if n == 0:
@@ -93,100 +53,6 @@ def get_topk_equal_weights(
 
     w = 1.0 / n
     return {ticker: w for ticker in top_selected.index.tolist()}
-
-
-def get_topk_dropout_weights(
-    selected: pd.DataFrame,
-    previous_allocation: Dict[str, float],
-    topk: int = 10,
-    n_drop: int = 2,
-    score_col: str = "proba_upside",
-) -> Dict[str, float]:
-    if selected.empty:
-        return {}
-
-    ranked = selected.sort_values(score_col, ascending=False)
-    target_universe = ranked.index.tolist()
-
-    if not previous_allocation:
-        initial = target_universe[:topk]
-        if not initial:
-            return {}
-        w = 1.0 / len(initial)
-        return {ticker: w for ticker in initial}
-
-    current_holdings = list(previous_allocation.keys())
-    current_scored = ranked.reindex(current_holdings).dropna(subset=[score_col])
-
-    keep = current_scored.sort_values(score_col, ascending=False)
-    keep_names = keep.index.tolist()
-
-    stocks_to_sell = keep_names[-min(n_drop, len(keep_names)):] if keep_names else []
-    remaining = [t for t in current_holdings if t not in stocks_to_sell]
-
-    candidates = [t for t in target_universe if t not in remaining]
-    slots_to_fill = max(0, topk - len(remaining))
-    new_buys = candidates[:slots_to_fill]
-
-    final_names = remaining + new_buys
-    final_names = final_names[:topk]
-
-    if not final_names:
-        return {}
-
-    w = 1.0 / len(final_names)
-    return {ticker: w for ticker in final_names}
-
-
-def get_equal_weight_fallback(tickers: list[str]) -> Dict[str, float]:
-    if not tickers:
-        return {}
-    w = 1.0 / len(tickers)
-    return {t: w for t in tickers}
-
-
-def build_markowitz_allocation(
-    selected: pd.DataFrame,
-    daily_prices: pd.DataFrame,
-    month_date: pd.Timestamp,
-    get_optimal_weights_fn: Any,
-    lookback_days: int = TRADING_DAYS_YEAR,
-    weight_bounds: Tuple[float, float] = (0.02, 0.25),
-) -> Dict[str, float]:
-    if selected.empty:
-        return {}
-
-    selected_tickers = selected.index.tolist()
-    prices_subset = (
-        daily_prices[selected_tickers]
-        .loc[:month_date]
-        .iloc[-lookback_days:]
-        .dropna(axis=1)
-    )
-
-    if prices_subset.empty:
-        return {}
-
-    valid_tickers = prices_subset.columns.tolist()
-    if not valid_tickers:
-        return {}
-
-    min_w, max_w = weight_bounds
-    min_assets_required = math.ceil(1.0 / max_w) if max_w > 0 else 999999
-
-    if len(valid_tickers) < min_assets_required:
-        logger.info(
-            f"Markowitz fallback to equal weight on {len(valid_tickers)} assets "
-            f"(need at least {min_assets_required} for max_weight={max_w:.2f})"
-        )
-        return get_equal_weight_fallback(valid_tickers)
-
-    weights, success = get_optimal_weights_fn(prices_subset)
-    if success and weights:
-        return weights
-
-    logger.info("Markowitz optimization failed, fallback to equal weight.")
-    return get_equal_weight_fallback(valid_tickers)
 
 
 # =============================================================================
@@ -237,15 +103,14 @@ def _simulate_daily_returns(
 
 def backtest_strategy_with_rebalancing(
     df_daily: pd.DataFrame,
-    signal_generator: AlphaSignal,
-    get_optimal_weights_fn: Any,
-    portfolio_method: str = "markowitz",   # "markowitz", "topk", "topk_dropout"
-    topk: int = 10,
-    n_drop: int = 2,
+    signal_generator,
+    top_k: int = 5,
+    target_cluster: int = 1,
+    proba_threshold: float = 0.55,
     fee_bps: float = 0.0020,
-    weight_bounds: Tuple[float, float] = (0.02, 0.25),
 ) -> Tuple[pd.DataFrame, pd.DataFrame]:
-    logger.info(f"Starting backtest | method={portfolio_method}")
+
+    logger.info("Starting backtest | method=topk")
 
     daily_prices = df_daily["adj close"].unstack().ffill()
     daily_returns = daily_prices.pct_change().fillna(0.0)
@@ -260,8 +125,10 @@ def backtest_strategy_with_rebalancing(
         daily_prices.index,
     )
 
-    portfolio_value, benchmark_value = 100.0, 100.0
-    all_records, rebalance_log = [], []
+    portfolio_value = 100.0
+    benchmark_value = 100.0
+    all_records = []
+    rebalance_log = []
 
     monthly_dates = (
         signal_generator.signal_cache.index.get_level_values("date")
@@ -279,47 +146,25 @@ def backtest_strategy_with_rebalancing(
 
         if not month_data.empty:
             selected = month_data[
-                (month_data["cluster"] == TARGET_CLUSTER)
-                & (month_data["proba_upside"] > PROBA_THRESHOLD)
+                (month_data["cluster"] == target_cluster) &
+                (month_data["proba_upside"] >= proba_threshold)
             ].copy()
 
             selected_count = len(selected)
 
             if not selected.empty:
-                if portfolio_method == "markowitz":
-                    allocation = build_markowitz_allocation(
-                        selected=selected,
-                        daily_prices=daily_prices,
-                        month_date=month_date,
-                        get_optimal_weights_fn=get_optimal_weights_fn,
-                        lookback_days=TRADING_DAYS_YEAR,
-                        weight_bounds=weight_bounds,
-                    )
-
-                elif portfolio_method == "topk":
-                    allocation = get_topk_equal_weights(
-                        selected=selected,
-                        topk=topk,
-                        score_col="proba_upside",
-                    )
-
-                elif portfolio_method == "topk_dropout":
-                    allocation = get_topk_dropout_weights(
-                        selected=selected,
-                        previous_allocation=previous_allocation,
-                        topk=topk,
-                        n_drop=n_drop,
-                        score_col="proba_upside",
-                    )
-
-                else:
-                    raise ValueError(f"Unknown portfolio_method: {portfolio_method}")
+                allocation = get_topk_equal_weights(
+                    selected=selected,
+                    top_k=top_k,
+                    score_col="proba_upside",
+                )
 
         cost_pct, turnover = calculate_turnover_friction(
             previous_allocation,
             allocation,
             fee_bps=fee_bps,
         )
+
         portfolio_value *= (1 - cost_pct)
         previous_allocation = allocation.copy()
 
@@ -341,7 +186,7 @@ def backtest_strategy_with_rebalancing(
         rebalance_log.append(
             {
                 "Date": month_date,
-                "Method": portfolio_method,
+                "Method": "topk",
                 "Selected_Count": selected_count,
                 "N_Stocks": len(allocation),
                 "Turnover": turnover,
@@ -352,6 +197,9 @@ def backtest_strategy_with_rebalancing(
 
     logger.info(f"Backtest complete. Final value: {portfolio_value:.2f}")
 
-    hist_df = pd.DataFrame(all_records).set_index("Date")
-    rebal_df = pd.DataFrame(rebalance_log).set_index("Date")
+    hist_df = pd.DataFrame(all_records).set_index("Date") if all_records else pd.DataFrame(columns=["Strategy", "Benchmark"])
+    rebal_df = pd.DataFrame(rebalance_log).set_index("Date") if rebalance_log else pd.DataFrame(
+        columns=["Method", "Selected_Count", "N_Stocks", "Turnover", "Cost_Pct", "Allocation"]
+    )
+
     return hist_df, rebal_df

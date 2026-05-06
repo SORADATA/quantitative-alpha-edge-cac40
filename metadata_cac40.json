@@ -1,30 +1,18 @@
 {
-    "market_name": "CAC40",
-    "last_update": "2026-05-06T17:45:15.590110",
+    "market_name": "CAC 40 (France)",
+    "strategy_method": "topk",
+    "top_k": 5,
+    "target_cluster": 3,
+    "proba_threshold": 0.55,
+    "last_update": "2026-05-06T18:10:33.192045",
     "current_allocation": {
-        "markowitz": {
-            "AIR.PA": 0.02,
-            "CA.PA": 0.25,
-            "EN.PA": 0.25,
-            "LR.PA": 0.17,
-            "PUB.PA": 0.02,
-            "STMPA.PA": 0.25,
-            "TEP.PA": 0.02,
-            "VIE.PA": 0.02
-        },
-        "topk": {
-            "CA.PA": 0.125,
-            "EN.PA": 0.125,
-            "TEP.PA": 0.125,
-            "PUB.PA": 0.125,
-            "STMPA.PA": 0.125,
-            "VIE.PA": 0.125,
-            "LR.PA": 0.125,
-            "AIR.PA": 0.125
-        }
+        "CA.PA": 0.2,
+        "EN.PA": 0.2,
+        "TEP.PA": 0.2,
+        "PUB.PA": 0.2,
+        "STMPA.PA": 0.2
     },
     "metrics": {
-        "markowitz_final_value": 117.72020784739543,
-        "topk_final_value": 100.14131837900494
+        "final_value": 116.45620521666254
     }
 }

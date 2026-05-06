@@ -1,27 +1,18 @@
 {
     "market_name": "NASDAQ 100 (USA)",
-    "last_update": "2026-05-06T16:32:44.649600",
+    "strategy_method": "topk",
+    "top_k": 5,
+    "target_cluster": 3,
+    "proba_threshold": 0.55,
+    "last_update": "2026-05-06T18:10:43.763721",
     "current_allocation": {
-        "AAPL": 0.02,
-        "ADI": 0.02,
-        "AMD": 0.0209,
-        "AMZN": 0.02,
-        "AVGO": 0.02,
-        "CDNS": 0.02,
-        "CSCO": 0.02,
-        "CSX": 0.14471,
-        "GOOG": 0.08878,
-        "GOOGL": 0.07508,
-        "INTC": 0.10625,
-        "LRCX": 0.02,
-        "MDLZ": 0.09429,
-        "MU": 0.25,
-        "QCOM": 0.02,
-        "SBUX": 0.02,
-        "SNPS": 0.02,
-        "TXN": 0.02
+        "MDLZ": 0.2,
+        "CSX": 0.2,
+        "SBUX": 0.2,
+        "AAPL": 0.2,
+        "CDNS": 0.2
     },
     "metrics": {
-        "final_value": 287.245300926539
+        "final_value": 720.8034690633889
     }
 }
