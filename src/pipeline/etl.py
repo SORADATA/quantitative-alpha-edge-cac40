@@ -14,7 +14,8 @@ from src.transform.features import (
     get_fama_french_betas
 )
 from src.transform.ticker_manager import handle_ticker_changes, validate_and_clean_tickers
-from src.utils.config_loader import TICKERS
+# Importation de la fonction de chargement au lieu de la variable statique
+from src.utils.config_loader import load_market_config
 from src.utils.logger import setup_logger
 
 logger = setup_logger("etl")
@@ -68,12 +69,23 @@ def _resample_to_monthly(df: pd.DataFrame) -> pd.DataFrame:
     return monthly
 
 
-def get_data_pipeline() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame]]:
-    """Full ETL pipeline orchestrator."""
+def get_data_pipeline(config_file: str = "cac40.json") -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame]]:
+    """
+    Full ETL pipeline orchestrator.
+    Désormais dynamique : utilise le fichier de config passé en argument.
+    """
+    # CHARGEMENT DYNAMIQUE DE LA CONFIG
+    config = load_market_config(config_file)
+    tickers_to_load = config.get('assets', [])
+    
+    if not tickers_to_load:
+        logger.error(f"No tickers found in {config_file}")
+        return None, None
+
     ticker_changes, delisted = handle_ticker_changes()
     active_tickers = [
         ticker_changes.get(t, t)
-        for t in TICKERS
+        for t in tickers_to_load
         if t not in delisted
     ]
 
@@ -99,9 +111,11 @@ def get_data_pipeline() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame]]
 
     logger.info(f"Saving raw data to {DATA_DIR}...")
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    df.to_parquet(DATA_DIR / "daily_raw.parquet", compression="gzip")
+    
+    # On ajoute un suffixe au nom du fichier pour éviter que les marchés s'écrasent entre eux
+    suffix = config_file.replace('.json', '')
+    df.to_parquet(DATA_DIR / f"daily_raw_{suffix}.parquet", compression="gzip")
 
-    # Calcul des indicateurs (la fonction corrigée)
     df = compute_technical_indicators(df)
 
     logger.info("Resampling to monthly frequency...")
@@ -109,25 +123,21 @@ def get_data_pipeline() -> Tuple[Optional[pd.DataFrame], Optional[pd.DataFrame]]
     df_monthly = df_monthly.groupby(level=1, group_keys=False).apply(calculate_returns)
     df_monthly = get_fama_french_betas(df_monthly)
 
-    # Ajout des lags
     for col in VARS_TO_LAG:
         if col in df_monthly.columns:
             df_monthly[f"{col}_lag1"] = df_monthly.groupby("ticker")[col].shift(1)
 
     logger.info("Saving monthly features...")
-    df_monthly.to_parquet(DATA_DIR / "monthly_features.parquet", compression="gzip")
+    df_monthly.to_parquet(DATA_DIR / f"monthly_features_{suffix}.parquet", compression="gzip")
 
     return df, df_monthly
 
 
 def load_models() -> Tuple[Optional[Any], Optional[Any]]:
-    """
-    Charge les modèles pré-entraînés XGBoost et KMeans depuis le dossier MODEL_DIR.
-    """
+    """Charge les modèles pré-entraînés XGBoost et KMeans."""
     from const import MODEL_DIR
     logger.info(f"Loading ML models from {MODEL_DIR}...")
     try:
-        # On s'assure que les fichiers existent avant d'ouvrir
         xgb_path = MODEL_DIR / 'xgboost_model.pkl'
         kmeans_path = MODEL_DIR / 'kmeans_model.pkl'
         if not xgb_path.exists() or not kmeans_path.exists():

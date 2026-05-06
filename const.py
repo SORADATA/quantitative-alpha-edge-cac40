@@ -9,7 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 MODEL_DIR = BASE_DIR / 'src' / 'models'
 LOG_DIR = BASE_DIR / "logs"
-CONFIG_FILE = BASE_DIR / "config" / "market_config.json"
+CONFIG_DIR = BASE_DIR / "config"
+DEFAULT_MARKET = "cac40.json"
+CONFIG_FILE = BASE_DIR / DEFAULT_MARKET
 
 # =============================================================================
 # MARKET & RISK

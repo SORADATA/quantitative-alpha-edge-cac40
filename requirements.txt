@@ -30,3 +30,11 @@ tqdm>=4.66.1
 # Web App
 streamlit>=1.30.0
 streamlit-autorefresh
+
+# Hugging face 
+huggingface_hub>=0.20.0
+datasets>=2.16.0
+pyarrow>=14.0.0
+
+# environnement variables
+python-dotenv>=1.0.0
