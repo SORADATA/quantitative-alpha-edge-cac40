@@ -35,4 +35,7 @@ logs/
 *.swp
 .env
 
+# Market configs not used yet
+config/nasdaq.json
+config/sp500.json
 
