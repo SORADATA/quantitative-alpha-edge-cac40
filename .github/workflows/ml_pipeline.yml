@@ -24,11 +24,16 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      
+      - name: 🔄 Run ETL (Download & Prepare Data)
+        run: python src/pipeline/etl.py
+        env:
+          PYTHONPATH: .
 
       - name: 🤖 Retrain & Push to Hugging Face
         run: python src/models/train.py
         env:
-          PYTHONPATH: .                         
+          PYTHONPATH: .                                
           PYTHONUNBUFFERED: 1
           HF_TOKEN: ${{ secrets.HF_TOKEN }}       
           MLFLOW_TRACKING_USERNAME: "SORADATA"

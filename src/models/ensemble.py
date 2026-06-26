@@ -22,50 +22,11 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 
 from src.models.cv import PurgedTimeSeriesSplit
 from src.utils.logger import setup_logger
+from const import FEATURE_GROUPS
 
 optuna.logging.set_verbosity(optuna.logging.WARNING)
 warnings.filterwarnings("ignore")
 logger = setup_logger("ensemble")
-
-
-FEATURE_GROUPS: Dict[str, List[str]] = {
-    "momentum": [
-        "return_1m", "return_2m", "return_3m", "return_6m", "return_9m", "return_12m",
-        "mom_12_1", "mom_6_1", "mom_3_1",
-        "mom_12_1_rank",
-    ],
-    "volatility": [
-        "realized_vol_3m", "realized_vol_12m", "vol_ratio",
-        "realized_vol_3m_rank", "garman_klass_vol_lag1",
-        "idio_vol",
-    ],
-    "risk_adjusted": [
-        "sharpe_3m", "sharpe_6m", "sortino_6m", "calmar_proxy",
-        "sharpe_6m_rank",
-    ],
-    "tail_risk": [
-        "return_skew_6m", "return_kurt_6m",
-        "hist_var_5pct", "cvar_5pct",
-    ],
-    "technical": [
-        "rsi_lag1", "macd_lag1", "bb_low_lag1", "bb_mid_lag1",
-        "bb_high_lag1", "atr_lag1", "cluster_lag1",
-        "bb_position", "rsi_divergence", "macd_sign",
-    ],
-    "liquidity": [
-        "amihud_illiquidity", "volume_trend_3m", "volume_zscore",
-        "amihud_illiquidity_rank", "euro_volume_lag1",
-    ],
-    "mean_reversion": [
-        "price_zscore_12", "nearness_52w_high",
-    ],
-    "macro": [
-        "Mkt-RF_lag1", "SMB_lag1", "HML_lag1", "RMW_lag1", "CMA_lag1",
-    ],
-    "seasonality": [
-        "month_sin", "month_cos", "is_q_end", "is_jan",
-    ],
-}
 
 
 def _all_features() -> List[str]:
@@ -188,13 +149,13 @@ class AlphaEdgeEnsemble(BaseEstimator, ClassifierMixin):
 
     def __init__(self, n_optuna_trials: int = 50):
         self.n_optuna_trials = n_optuna_trials
-        self.xgb_model_: Optional[xgb.XGBClassifier]   = None
-        self.lgb_model_: Optional[lgb.LGBMClassifier]  = None
+        self.xgb_model_: Optional[xgb.XGBClassifier] = None
+        self.lgb_model_: Optional[lgb.LGBMClassifier] = None
         self.ridge_model_: Optional[CalibratedClassifierCV] = None
         self.meta_model_:  Optional[LogisticRegression] = None
-        self.scaler_:      Optional[StandardScaler]     = None
-        self.features_:    Optional[List[str]]          = None
-        self.classes_                                   = np.array([0, 1])
+        self.scaler_:      Optional[StandardScaler] = None
+        self.features_:    Optional[List[str]] = None
+        self.classes_ = np.array([0, 1])
 
     def _oof_probas(
         self,
@@ -205,7 +166,7 @@ class AlphaEdgeEnsemble(BaseEstimator, ClassifierMixin):
     ) -> np.ndarray:
         """Génère les probabilités out-of-fold pour le méta-learner."""
         oof = np.zeros(len(X))
-        cv  = PurgedTimeSeriesSplit(n_splits=5)
+        cv = PurgedTimeSeriesSplit(n_splits=5)
 
         for tr_idx, val_idx in cv.split(X):
             m = model_cls(**fit_kwargs)
@@ -225,7 +186,6 @@ class AlphaEdgeEnsemble(BaseEstimator, ClassifierMixin):
 
         trials_each = max(10, self.n_optuna_trials // 2)
 
-        # ── Niveau 0 : entraînement avec Optuna ───────────────
         logger.info("  [1/3] XGBoost...")
         self.xgb_model_ = _xgb_objective(X, y, trials_each)
 
@@ -239,11 +199,11 @@ class AlphaEdgeEnsemble(BaseEstimator, ClassifierMixin):
         self.ridge_model_ = CalibratedClassifierCV(ridge_base, cv=5, method="sigmoid")
         self.ridge_model_.fit(X_scaled, y)
 
-        # ── Niveau 1 : méta-learner sur probas OOF ────────────
+        # ── Niveau 1 : méta-learner sur probas OOF
         logger.info("  [Meta] Stacking LogisticRegression...")
-        oof_xgb   = self._oof_probas(X, y, xgb.XGBClassifier,
+        oof_xgb = self._oof_probas(X, y, xgb.XGBClassifier,
                                      {**self.xgb_model_.get_params(), "eval_metric": "auc"})
-        oof_lgb   = self._oof_probas(X, y, lgb.LGBMClassifier,
+        oof_lgb = self._oof_probas(X, y, lgb.LGBMClassifier,
                                      {**self.lgb_model_.get_params(), "verbose": -1})
         oof_ridge = self.ridge_model_.predict_proba(X_scaled)[:, 1]
 

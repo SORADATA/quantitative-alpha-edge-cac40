@@ -52,7 +52,7 @@ MAX_STOCKS:       int = 15     # nombre max de titres en portefeuille
 #       → DOIVENT être laggés : utiliser les versions _lag1
 
 FEATURE_COLS: list[str] = [
-    # ── Indicateurs techniques (laggés — anti-leakage) ──────
+    # ── Indicateurs techniques (laggés — anti-leakage)
     "rsi_lag1",
     "macd_lag1",
     "bb_low_lag1",
@@ -61,7 +61,7 @@ FEATURE_COLS: list[str] = [
     "atr_lag1",
     "cluster_lag1",
 
-    # ── Momentum (rendements passés — pas de leakage) ───────
+    # ── Momentum (rendements passés — pas de leakage)
     "return_1m",
     "return_2m",
     "return_3m",
@@ -69,51 +69,51 @@ FEATURE_COLS: list[str] = [
     "return_9m",
     "return_12m",
 
-    # ── Alpha features momentum (skip-1m) ───────────────────
+    # ── Alpha features momentum (skip-1m)
     "mom_12_1",
     "mom_6_1",
 
-    # ── Volatilité ───────────────────────────────────────────
+    # ── Volatilité
     "realized_vol_3m",
     "realized_vol_12m",
     "vol_ratio",
 
-    # ── Risk-adjusted ────────────────────────────────────────
+    # ── Risk-adjusted
     "sharpe_3m",
     "sharpe_6m",
     "sortino_6m",
 
-    # ── Tail risk ────────────────────────────────────────────
+    # ── Tail risk
     "return_skew_6m",
     "hist_var_5pct",
     "cvar_5pct",
 
-    # ── Liquidité ────────────────────────────────────────────
+    # ── Liquidité
     "amihud_illiquidity",
     "volume_zscore",
 
-    # ── Mean reversion ───────────────────────────────────────
+    # ── Mean reversion
     "price_zscore_12",
     "nearness_52w_high",
 
-    # ── Features cross-sectionnelles (rank percentile) ───────
+    # ── Features cross-sectionnelles (rank percentile)
     "mom_12_1_rank",
     "sharpe_6m_rank",
     "realized_vol_3m_rank",
     "amihud_illiquidity_rank",
 
-    # ── Macro Fama-French (laggés dans VARS_TO_LAG) ──────────
+    # ── Macro Fama-French (laggés dans VARS_TO_LAG)
     "Mkt-RF_lag1",
     "SMB_lag1",
     "HML_lag1",
     "RMW_lag1",
     "CMA_lag1",
 
-    # ── Macro agrégée (laggée dans VARS_TO_LAG) ──────────────
+    # ── Macro agrégée (laggée dans VARS_TO_LAG)
     "euro_volume_lag1",
     "garman_klass_vol_lag1",
 
-    # ── Saisonnalité ─────────────────────────────────────────
+    # ── Saisonnalité
     "month_sin",
     "month_cos",
     "is_q_end",
@@ -170,3 +170,49 @@ RESAMPLE_LAST_EXCLUDE: list[str] = [
     "low",
     "close",
 ]
+
+SHARPE_THRESHOLD = 0.5
+MAX_DD_THRESHOLD = -0.15
+
+
+TRANSACTION_COST = 0.0010
+MIN_STOCKS_OPTIM = 3
+MAX_STOCKS_SELECT = 15
+PROBA_MIN = 0.55
+WEIGHT_BOUNDS = (0.02, 0.20)
+
+
+FEATURE_GROUPS = {
+    "momentum": [
+        "return_1m", "return_2m", "return_3m", "return_6m", "return_9m", "return_12m",
+        "mom_12_1", "mom_6_1", "mom_3_1", "mom_12_1_rank",
+    ],
+    "volatility": [
+        "realized_vol_3m", "realized_vol_12m", "vol_ratio",
+        "realized_vol_3m_rank", "garman_klass_vol_lag1", "idio_vol",
+    ],
+    "risk_adjusted": [
+        "sharpe_3m", "sharpe_6m", "sortino_6m", "calmar_proxy", "sharpe_6m_rank",
+    ],
+    "tail_risk": [
+        "return_skew_6m", "return_kurt_6m", "hist_var_5pct", "cvar_5pct",
+    ],
+    "technical": [
+        "rsi_lag1", "macd_lag1", "bb_low_lag1", "bb_mid_lag1",
+        "bb_high_lag1", "atr_lag1", "cluster_lag1",
+        "bb_position", "rsi_divergence", "macd_sign",
+    ],
+    "liquidity": [
+        "amihud_illiquidity", "volume_trend_3m", "volume_zscore",
+        "amihud_illiquidity_rank", "euro_volume_lag1",
+    ],
+    "mean_reversion": [
+        "price_zscore_12", "nearness_52w_high",
+    ],
+    "macro": [
+        "Mkt-RF_lag1", "SMB_lag1", "HML_lag1", "RMW_lag1", "CMA_lag1",
+    ],
+    "seasonality": [
+        "month_sin", "month_cos", "is_q_end", "is_jan",
+    ],
+}
